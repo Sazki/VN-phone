@@ -6,19 +6,19 @@ session_start();
 
 $admin_id = $_SESSION['admin_id'];
 
-if(!isset($admin_id)){
-   header('location:admin_login.php');
+if (!isset($admin_id)) {
+    header('location:admin_login.php');
 }
 
-if(isset($_GET['delete'])){
-   $delete_id = $_GET['delete'];
-   $delete_users = $conn->prepare("DELETE FROM `users` WHERE userID = ?");
-   $delete_users->execute([$delete_id]);
-   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE user_id = ?");
-   $delete_order->execute([$delete_id]);
-   // $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
-   // $delete_cart->execute([$delete_id]);
-   header('location:users_accounts.php');
+if (isset($_GET['delete'])) {
+    $delete_id = $_GET['delete'];
+    $delete_users = $conn->prepare("DELETE FROM `users` WHERE userID = ?");
+    $delete_users->execute([$delete_id]);
+    $delete_order = $conn->prepare("DELETE FROM `orders` WHERE user_id = ?");
+    $delete_order->execute([$delete_id]);
+    // $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
+    // $delete_cart->execute([$delete_id]);
+    header('location:users_accounts.php');
 }
 
 ?>
@@ -30,13 +30,104 @@ if(isset($_GET['delete'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tài khoản người dùng</title>
+    <title>Tài khoản người dùng</title>
 
-    <!-- font awesome cdn link  -->
+    <!-- Font Awesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    <!-- custom css file link  -->
+    <!-- Custom CSS File Link -->
     <link rel="stylesheet" href="../css/admin_style.css">
+
+    <style>
+    /* CSS cho bảng tài khoản */
+    .accounts-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .accounts-table th,
+    .accounts-table td {
+        padding: 12px 20px;
+        border: 1px solid #ddd;
+    }
+
+    .accounts-table th {
+        background-color: #7b7b7b;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .accounts-table td {
+        text-align: left;
+    }
+
+    .accounts-table tr {
+        transition: background-color 0.3s ease;
+    }
+
+    .accounts-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .actions a {
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .actions a.delete-btn {
+        background-color: #dc3545;
+    }
+
+    .actions a:hover {
+        background-color: #0056b3;
+    }
+
+    .actions a.delete-btn:hover {
+        background-color: #c82333;
+    }
+
+    .empty {
+        text-align: center;
+        font-size: 18px;
+        color: #777;
+    }
+
+    .add-admin-btn {
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 12px;
+        background-color: #28a745;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .add-admin-btn:hover {
+        background-color: #218838;
+    }
+    </style>
 
 </head>
 
@@ -44,46 +135,56 @@ if(isset($_GET['delete'])){
 
     <?php include '../components/admin_header.php' ?>
 
-    <!-- user accounts section starts  -->
-
+    <!-- user accounts section starts -->
     <section class="accounts">
 
-        <h1 class="heading">tài khoản người dùng</h1>
+        <h1 class="heading">Tài khoản người dùng</h1>
 
-        <div class="box-container">
+        <table class="accounts-table">
+            <thead>
+                <tr>
+                    <th>Mã người dùng</th>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            <?php
-      $select_account = $conn->prepare("SELECT * FROM `users` WHERE role = ?");
-      $select_account->execute(['client']);
-      if($select_account->rowCount() > 0){
-         while($fetch_accounts = $select_account->fetch(PDO::FETCH_ASSOC)){  
-   ?>
-            <div class="box">
-                <p> user id : <span><?= $fetch_accounts['userID']; ?></span> </p>
-                <p> username : <span><?= $fetch_accounts['name']; ?></span> </p>
-                <a href="users_accounts.php?delete=<?= $fetch_accounts['userID']; ?>" class="delete-btn"
-                    onclick="return confirm('delete this account?');">xóa</a>
-            </div>
-            <?php
-      }
-   }else{
-      echo '<p class="empty">no accounts available</p>';
-   }
-   ?>
+                <?php
+                $select_account = $conn->prepare("SELECT * FROM `users` WHERE role = ?");
+                $select_account->execute(['client']);
+                if ($select_account->rowCount() > 0) {
+                    while ($fetch_accounts = $select_account->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                <tr>
+                    <td><?= $fetch_accounts['userID']; ?></td>
+                    <td><?= $fetch_accounts['name']; ?></td>
+                    <td><?= $fetch_accounts['email']; ?></td>
+                    <td><?= $fetch_accounts['phoneNumber']; ?></td>
+                    <td><?= $fetch_accounts['address']; ?></td>
+                    <td>
+                        <a href="users_accounts.php?delete=<?= $fetch_accounts['userID']; ?>" class="delete-btn"
+                            onclick="return confirm('Delete this account?');">Xóa</a>
+                    </td>
+                </tr>
+                <?php
+                    }
+                } else {
+                    echo '<tr><td colspan="3" class="empty">No accounts available</td></tr>';
+                }
+                ?>
 
-        </div>
+            </tbody>
+        </table>
+
 
     </section>
-
     <!-- user accounts section ends -->
 
-
-
-
-
-
-
-    <!-- custom js file link  -->
+    <!-- Custom JS File Link -->
     <script src="../js/admin_script.js"></script>
 
 </body>

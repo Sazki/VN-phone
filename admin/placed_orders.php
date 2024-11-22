@@ -1,7 +1,5 @@
 <?php
 
-require('../include/fpdf/fpdf.php');
-
 include '../components/connect.php';
 
 session_start();
@@ -27,64 +25,6 @@ if (isset($_GET['delete'])) {
     header('location:placed_orders.php');
 }
 
-// //in hóa đơn
-// if (isset($_GET['order_id'])) {
-//     $order_id = $_GET['order_id'];
-
-//     // Lấy dữ liệu đơn hàng từ cơ sở dữ liệu
-//     $select_order = $conn->prepare("SELECT * FROM `orders` WHERE id = ?");
-//     $select_order->execute([$order_id]);
-//     if ($select_order->rowCount() > 0) {
-//         $order = $select_order->fetch(PDO::FETCH_ASSOC);
-
-//         // Khởi tạo FPDF
-//         $pdf = new FPDF();
-//         $pdf->AddPage();
-
-//         // Tiêu đề hóa đơn
-//         $pdf->SetFont('Arial', 'B', 16);
-//         $pdf->Cell(0, 10, 'Hoa Don Thanh Toan', 0, 1, 'C');
-//         $pdf->Ln(10);
-
-//         // Thông tin đơn hàng
-//         $pdf->SetFont('Arial', '', 12);
-//         $pdf->Cell(50, 10, 'ID Khach Hang:', 0, 0);
-//         $pdf->Cell(50, 10, $order['userID'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'Ngay Dat Hang:', 0, 0);
-//         $pdf->Cell(50, 10, $order['placed_on'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'Ten:', 0, 0);
-//         $pdf->Cell(50, 10, $order['name'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'Email:', 0, 0);
-//         $pdf->Cell(50, 10, $order['email'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'So Dien Thoai:', 0, 0);
-//         $pdf->Cell(50, 10, $order['phoneNumber'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'Dia Chi:', 0, 0);
-//         $pdf->Cell(50, 10, $order['address'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'Chi Tiet Don Hang:', 0, 0);
-//         $pdf->Cell(50, 10, $order['total_products'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'Gia Don:', 0, 0);
-//         $pdf->Cell(50, 10, '$' . $order['total_price'] . '/-', 0, 1);
-
-//         $pdf->Cell(50, 10, 'Phuong Thuc:', 0, 0);
-//         $pdf->Cell(50, 10, $order['method'], 0, 1);
-
-//         $pdf->Cell(50, 10, 'Trang Thai Thanh Toan:', 0, 0);
-//         $pdf->Cell(50, 10, $order['payment_status'], 0, 1);
-
-//         // Xuất file PDF
-//         $pdf->Output('D', 'hoadon_' . $order_id . '.pdf');
-//     } else {
-//         echo "Đơn hàng không tồn tại!";
-//     }
-// }
-
 ?>
 
 <!DOCTYPE html>
@@ -106,30 +46,38 @@ if (isset($_GET['delete'])) {
     <link rel="stylesheet" href="../css/admin_style.css">
 
     <style>
-    /* CSS cho bảng */
+    /* CSS cho bảng orders */
     .orders-table {
         width: 100%;
         border-collapse: collapse;
         margin: 20px 0;
-        font-size: 18px;
+        font-size: 16px;
         text-align: left;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .orders-table th,
     .orders-table td {
+        padding: 12px 20px;
         border: 1px solid #ddd;
-        padding: 8px;
     }
 
     .orders-table th {
-        background-color: #f4f4f4;
-        color: #333;
+        background-color: #7b7b7b;
+        ;
+        color: white;
         font-weight: bold;
         text-align: center;
     }
 
     .orders-table td {
         text-align: center;
+    }
+
+    /* Hiệu ứng hover cho hàng trong bảng */
+    .orders-table tr:hover {
+        background-color: #f1f1f1;
     }
 
     /* Badge trạng thái */
@@ -152,6 +100,11 @@ if (isset($_GET['delete'])) {
         /* Vàng */
     }
 
+    .badge-danger {
+        background-color: #dc3545;
+        /* Đỏ */
+    }
+
     /* Nút hành động */
     .btn {
         padding: 6px 12px;
@@ -161,6 +114,7 @@ if (isset($_GET['delete'])) {
         font-size: 14px;
         cursor: pointer;
         text-decoration: none;
+        transition: background-color 0.3s;
     }
 
     .btn-primary {
@@ -171,18 +125,38 @@ if (isset($_GET['delete'])) {
         background-color: #dc3545;
     }
 
-    .btn-primary:hover,
+    /* Hiệu ứng hover cho nút */
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
     .btn-danger:hover {
-        opacity: 0.9;
+        background-color: #c82333;
     }
 
     /* Căn chỉnh hành động */
     .action-buttons {
         display: flex;
-        gap: 10px;
         justify-content: center;
+        gap: 10px;
+    }
+
+    /* Hiệu ứng khi di chuột qua các ô */
+    .orders-table td:hover {
+        background-color: #f8f8f8;
+    }
+
+    /* Các hàng có màu nền nhẹ */
+    .orders-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .orders-table td {
+        background-color: #fff;
+        text-align: center;
     }
     </style>
+
 
 </head>
 

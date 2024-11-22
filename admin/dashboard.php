@@ -52,12 +52,10 @@ if (!isset($admin_id)) {
                 $total_pendings = 0;
                 $select_pendings = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
                 $select_pendings->execute(['chờ giao hàng']);
-                while ($fetch_pendings = $select_pendings->fetch(PDO::FETCH_ASSOC)) {
-                    $total_pendings += $fetch_pendings['total_price'];
-                }
+                $numbers_of_pendings = $select_pendings->rowCount();
                 ?>
-                <h3><?= $total_pendings; ?> k</h3>
-                <p>tổng số tiền đang chờ xử lý</p>
+                <h3><?= $numbers_of_pendings; ?></h3>
+                <p>tổng số đơn hàng đang chờ xử lý</p>
                 <a href="placed_orders.php" class="btn">xem đơn hàng</a>
             </div>
 
@@ -66,12 +64,10 @@ if (!isset($admin_id)) {
                 $total_completes = 0;
                 $select_completes = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
                 $select_completes->execute(['Đã giao hàng']);
-                while ($fetch_completes = $select_completes->fetch(PDO::FETCH_ASSOC)) {
-                    $total_completes += $fetch_completes['total_price'];
-                }
+                $numbers_of_completes = $select_completes->rowCount();
                 ?>
-                <h3><?= $total_completes; ?> k</h3>
-                <p>tổng số tiền đã hoàn thành</p>
+                <h3><?= $numbers_of_completes; ?></h3>
+                <p>tổng số đơn hàng đã giao</p>
                 <a href="placed_orders.php" class="btn">Xem đơn hàng</a>
             </div>
 

@@ -61,7 +61,7 @@ $category = htmlspecialchars($category, ENT_QUOTES, 'UTF-8'); // Làm sạch bi�
                 <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
                 <div class="name"><?= $fetch_products['productName']; ?></div>
                 <div class="flex">
-                    <div class="price"><span>$</span><?= $fetch_products['price']; ?></div>
+                    <div class="price"><?= $fetch_products['price']; ?>k</div>
                     <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
                 </div>
             </form>

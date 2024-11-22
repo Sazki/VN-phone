@@ -1,5 +1,5 @@
 <?php
-require('../include/fpdf/fpdf.php');
+require '../vendor/autoload.php'; // Đường dẫn tới autoload của Composer
 include '../components/connect.php';
 
 session_start();
@@ -21,50 +21,73 @@ if (isset($_GET['order_id'])) {
     if ($select_order->rowCount() > 0) {
         $order = $select_order->fetch(PDO::FETCH_ASSOC);
 
-        // Khởi tạo FPDF
-        $pdf = new FPDF();
-        $pdf->AddPage();
+        // Khởi tạo mPDF
+        $mpdf = new \Mpdf\Mpdf();
 
-        // Tiêu đề hóa đơn
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(0, 10, 'Hoa Don Thanh Toan', 0, 1, 'C');
-        $pdf->Ln(10);
+        // Nội dung hóa đơn được thiết kế
+        $html = '
+        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd;">
+            <h1 style="text-align: center; color: #4CAF50;">VN-Food</h1>
+            <p style="text-align: center;">Hóa Đơn Thanh Toán</p>
+            <hr>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>ID Khách Hàng</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['userID'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Ngày Đặt Hàng</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['placed_on'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Tên</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['name'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Email</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['email'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Số Điện Thoại</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['phoneNumber'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Địa Chỉ</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['address'] . '</td>
+                </tr>
+            </table>
 
-        // Thông tin đơn hàng
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(50, 10, 'ID Khach Hang:', 0, 0);
-        $pdf->Cell(50, 10, $order['userID'], 0, 1);
+            <h3 style="text-align: left;">Chi Tiết Đơn Hàng</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Tên Sản Phẩm</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['total_products'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Tổng Tiền</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['total_price'] . 'k</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Phương Thức Thanh Toán</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['method'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Trạng Thái Thanh Toán</strong></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">' . $order['payment_status'] . '</td>
+                </tr>
+            </table>
+            <p style="text-align: center; font-size: 14px; color: #666;">Cảm ơn bạn đã đặt hàng tại VN-Food!</p>
+        </div>
+        ';
 
-        $pdf->Cell(50, 10, 'Ngay Dat Hang:', 0, 0);
-        $pdf->Cell(50, 10, $order['placed_on'], 0, 1);
-
-        $pdf->Cell(50, 10, 'Ten:', 0, 0);
-        $pdf->Cell(50, 10, $order['name'], 0, 1);
-
-        $pdf->Cell(50, 10, 'Email:', 0, 0);
-        $pdf->Cell(50, 10, $order['email'], 0, 1);
-
-        $pdf->Cell(50, 10, 'So Dien Thoai:', 0, 0);
-        $pdf->Cell(50, 10, $order['phoneNumber'], 0, 1);
-
-        $pdf->Cell(50, 10, 'Dia Chi:', 0, 0);
-        $pdf->Cell(50, 10, $order['address'], 0, 1);
-
-        $pdf->Cell(50, 10, 'Chi Tiet Don Hang:', 0, 0);
-        $pdf->Cell(50, 10, $order['total_products'], 0, 1);
-
-        $pdf->Cell(50, 10, 'Gia Don:', 0, 0);
-        $pdf->Cell(50, 10, '$' . $order['total_price'] . '/-', 0, 1);
-
-        $pdf->Cell(50, 10, 'Phuong Thuc:', 0, 0);
-        $pdf->Cell(50, 10, $order['method'], 0, 1);
-
-        $pdf->Cell(50, 10, 'Trang Thai Thanh Toan:', 0, 0);
-        $pdf->Cell(50, 10, $order['payment_status'], 0, 1);
+        // Viết nội dung vào PDF
+        $mpdf->WriteHTML($html);
 
         // Xuất file PDF
-        $pdf->Output();
-        //     $pdf->Output('D', 'hoadon_' . $order_id . '.pdf');
+        // Xuất file PDF với tên file được mã hóa theo kiểu Vn-Food-<order_id>.pdf
+        // $mpdf->Output('Vn-Food-' . $order_id . '.pdf', 'D');
+
+        $mpdf->Output();
     } else {
         echo "Đơn hàng không tồn tại!";
     }
