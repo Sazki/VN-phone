@@ -117,7 +117,7 @@ $grand_total = 0;
                 <button type="submit" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" name="delete_all"
                     onclick="return confirm('delete all from cart?');">xóa tất cả</button>
             </form>
-            <a href="menu.php" class="btn">tiếp tục mua sắm</a>
+            <a href="menu.php" class="btn">tiếp tục chọn món</a>
         </div>
 
     </section>

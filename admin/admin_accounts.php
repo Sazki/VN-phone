@@ -10,6 +10,7 @@ if (!isset($admin_id)) {
     header('location:admin_login.php');
 }
 
+// Xóa tài khoản
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     $delete_admin = $conn->prepare("DELETE FROM `users` WHERE userID = ?");
@@ -17,7 +18,29 @@ if (isset($_GET['delete'])) {
     header('location:admin_accounts.php');
 }
 
+// Số lượng tài khoản hiển thị trên mỗi trang
+$limit = 5;
+
+// Lấy trang hiện tại từ query string (mặc định là 1)
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+
+// Tính vị trí bắt đầu
+$start = ($page - 1) * $limit;
+
+// Lấy tổng số tài khoản
+$total_accounts_query = $conn->prepare("SELECT COUNT(*) FROM `users` WHERE role = ?");
+$total_accounts_query->execute(['admin']);
+$total_accounts = $total_accounts_query->fetchColumn();
+
+// Tổng số trang
+$total_pages = ceil($total_accounts / $limit);
+
+// Truy vấn lấy tài khoản theo giới hạn
+$select_account = $conn->prepare("SELECT * FROM `users` WHERE role = ? LIMIT $start, $limit");
+$select_account->execute(['admin']);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,22 +58,24 @@ if (isset($_GET['delete'])) {
     <link rel="stylesheet" href="../css/admin_style.css">
 
     <style>
-    /* CSS cho bảng tài khoản */
+    /* CSS cho bảng admin accounts */
     .accounts-table {
         width: 100%;
         border-collapse: collapse;
         margin: 20px 0;
         font-size: 16px;
         text-align: left;
-        border-radius: 8px;
+        border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+        background-color: #f8f8f8;
+        animation: fadeIn 1s ease-in-out;
     }
 
     .accounts-table th,
     .accounts-table td {
-        padding: 12px 20px;
+        padding: 14px 20px;
         border: 1px solid #ddd;
+        font-family: 'Arial', sans-serif;
     }
 
     .accounts-table th {
@@ -58,100 +83,130 @@ if (isset($_GET['delete'])) {
         color: white;
         font-weight: bold;
         text-align: center;
+        text-transform: uppercase;
     }
 
     .accounts-table td {
-        text-align: left;
-    }
-
-    .accounts-table tr {
-        transition: background-color 0.3s ease;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
     }
 
     .accounts-table tr:hover {
         background-color: #f1f1f1;
     }
 
-    .actions {
+    .accounts-table tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+
+    /* Hiệu ứng fade-in cho bảng */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Cải thiện nút hành động */
+    .action-buttons {
         display: flex;
-        gap: 10px;
         justify-content: center;
+        gap: 10px;
     }
 
-    .actions a {
-        padding: 8px 15px;
-        background-color: #007bff;
-        color: #fff;
+    .action-buttons a {
+        padding: 8px 16px;
         border-radius: 5px;
-        text-decoration: none;
+        color: #fff;
         font-size: 14px;
-        transition: background-color 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: bold;
     }
 
-    .actions a.delete-btn {
+    .action-buttons a.delete-btn {
         background-color: #dc3545;
     }
 
-    .actions a:hover {
-        background-color: #0056b3;
+    .action-buttons a.option-btn {
+        background-color: #007bff;
     }
 
-    .actions a.delete-btn:hover {
+    .action-buttons a.delete-btn:hover {
         background-color: #c82333;
     }
 
-    .empty {
-        text-align: center;
-        font-size: 18px;
-        color: #777;
+    .action-buttons a.option-btn:hover {
+        background-color: #0056b3;
     }
 
-    .add-admin-btn {
-        display: block;
-        width: 200px;
-        margin: 20px auto;
-        padding: 12px;
-        background-color: #28a745;
-        color: white;
+    .action-buttons a:hover {
+        transform: scale(1.1);
+    }
+
+    /* Chỉnh sửa phân trang */
+    .pagination {
         text-align: center;
-        border-radius: 5px;
-        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        padding: 8px 16px;
+        margin: 0 5px;
         text-decoration: none;
-        transition: background-color 0.3s;
+        border: 1px solid #ddd;
+        color: #ecb901;
+        font-size: 14px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
     }
 
-    .add-admin-btn:hover {
-        background-color: #218838;
+    .pagination a:hover {
+        background-color: #f1f1f1;
+        transform: scale(1.1);
+    }
+
+    .pagination a.active {
+        background-color: #ecb901;
+        color: #fff;
+    }
+
+    /* Header */
+    .heading {
+        text-align: center;
+        margin: 30px 0;
+        font-size: 24px;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        text-transform: uppercase;
     }
     </style>
+
 </head>
 
 <body>
 
     <?php include '../components/admin_header.php' ?>
 
-    <!-- admins accounts section starts  -->
     <section class="accounts">
+        <h1 class="heading">Danh sách tài khoản quản trị viên</h1>
 
-        <h1 class="heading">tài khoản quản trị viên</h1>
-
-        <!-- Thêm tài khoản quản trị viên mới
-        <a href="register_admin.php" class="add-admin-btn">Thêm quản trị viên mới</a> -->
-
-        <!-- Bảng hiển thị tài khoản quản trị viên -->
         <table class="accounts-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Tên quản trị viên</th>
                     <th>Email</th>
-                    <th style="width: 100px;">Hành động</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $select_account = $conn->prepare("SELECT * FROM `users` WHERE role = ?");
-                $select_account->execute(['admin']);
                 if ($select_account->rowCount() > 0) {
                     while ($fetch_accounts = $select_account->fetch(PDO::FETCH_ASSOC)) {
                 ?>
@@ -159,16 +214,12 @@ if (isset($_GET['delete'])) {
                     <td><?= $fetch_accounts['userID']; ?></td>
                     <td><?= $fetch_accounts['name']; ?></td>
                     <td><?= $fetch_accounts['email']; ?></td>
-                    <td class="actions">
-                        <!-- Hiển thị nút xóa và cập nhật -->
+                    <td class="action-buttons">
                         <a href="admin_accounts.php?delete=<?= $fetch_accounts['userID']; ?>" class="delete-btn"
                             onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?');">Xóa</a>
-                        <?php
-                                // Nếu tài khoản là tài khoản hiện tại, cho phép cập nhật
-                                if ($fetch_accounts['userID'] == $admin_id) {
-                                    echo '<a href="update_profile.php" class="option-btn">Sửa</a>';
-                                }
-                                ?>
+                        <?php if ($fetch_accounts['userID'] == $admin_id): ?>
+                        <a href="update_profile.php" class="option-btn">Sửa</a>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php
@@ -180,10 +231,22 @@ if (isset($_GET['delete'])) {
             </tbody>
         </table>
 
-    </section>
-    <!-- admins accounts section ends -->
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+            <a href="?page=<?= $page - 1; ?>">&laquo; Trước</a>
+            <?php endif; ?>
 
-    <!-- custom js file link  -->
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+            <a href="?page=<?= $i; ?>" class="<?= $i == $page ? 'active' : ''; ?>"><?= $i; ?></a>
+            <?php endfor; ?>
+
+            <?php if ($page < $total_pages): ?>
+            <a href="?page=<?= $page + 1; ?>">Tiếp &raquo;</a>
+            <?php endif; ?>
+        </div>
+    </section>
+
+
     <script src="../js/admin_script.js"></script>
 
 </body>

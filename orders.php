@@ -9,7 +9,15 @@ if (isset($_SESSION['user_id'])) {
 } else {
    $user_id = '';
    header('location:home.php');
-};
+}
+
+// Xử lý khi người dùng nhấn nút "Đã nhận hàng"
+if (isset($_POST['confirm_received'])) {
+   $order_id = $_POST['order_id'];
+   $update_status = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
+   $update_status->execute(['đã giao hàng', $order_id]);
+   $message[] = 'Trạng thái đơn hàng đã được cập nhật thành "Đã giao hàng".';
+}
 
 ?>
 
@@ -27,6 +35,31 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+    .btn {
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #218838;
+    }
+
+    .box {
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    </style>
 
 </head>
 
@@ -65,12 +98,25 @@ if (isset($_SESSION['user_id'])) {
                 <p>phương thức thanh toán : <span><?= $fetch_orders['method']; ?></span></p>
                 <p>Chi tiết đơn hàng: <span><?= $fetch_orders['total_products']; ?></span></p>
                 <p>Tổng giá đơn : <span><?= $fetch_orders['total_price']; ?>k</span></p>
-                <p>Tình trạng thanh toán : <span style="color:<?php if ($fetch_orders['payment_status'] == 'pending') {
-                                             echo 'red';
-                                          } else {
-                                             echo 'green';
-                                          }; ?>"><?= $fetch_orders['payment_status']; ?></span>
+                <p>Tình trạng đơn hàng :
+                    <span style="color:<?php
+                                             if ($fetch_orders['payment_status'] == 'chờ giao hàng') {
+                                                echo 'orange';
+                                             } elseif ($fetch_orders['payment_status'] == 'đang giao hàng') {
+                                                echo 'blue';
+                                             } else {
+                                                echo 'green';
+                                             }; ?>">
+                        <?= $fetch_orders['payment_status']; ?>
+                    </span>
                 </p>
+
+                <?php if ($fetch_orders['payment_status'] === 'đang giao hàng') { ?>
+                <form action="" method="POST">
+                    <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
+                    <button type="submit" name="confirm_received" class="btn">Đã nhận được hàng</button>
+                </form>
+                <?php } ?>
             </div>
             <?php
                }
@@ -84,23 +130,9 @@ if (isset($_SESSION['user_id'])) {
 
     </section>
 
-
-
-
-
-
-
-
-
-
     <!-- footer section starts  -->
     <?php include 'components/footer.php'; ?>
     <!-- footer section ends -->
-
-
-
-
-
 
     <!-- custom js file link  -->
     <script src="js/script.js"></script>
