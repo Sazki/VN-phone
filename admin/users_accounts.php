@@ -58,7 +58,7 @@ if (isset($_GET['delete'])) {
     }
 
     .accounts-table th {
-        background-color: #7b7b7b;
+        background-color: #ecb901;
         color: white;
         font-weight: bold;
         text-align: center;

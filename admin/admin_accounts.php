@@ -54,7 +54,7 @@ if (isset($_GET['delete'])) {
     }
 
     .accounts-table th {
-        background-color: #7b7b7b;
+        background-color: #ecb901;
         color: white;
         font-weight: bold;
         text-align: center;
@@ -145,7 +145,7 @@ if (isset($_GET['delete'])) {
                     <th>ID</th>
                     <th>Tên quản trị viên</th>
                     <th>Email</th>
-                    <th>Hành động</th>
+                    <th style="width: 100px;">Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -166,7 +166,7 @@ if (isset($_GET['delete'])) {
                         <?php
                                 // Nếu tài khoản là tài khoản hiện tại, cho phép cập nhật
                                 if ($fetch_accounts['userID'] == $admin_id) {
-                                    echo '<a href="update_profile.php" class="option-btn">Cập nhật</a>';
+                                    echo '<a href="update_profile.php" class="option-btn">Sửa</a>';
                                 }
                                 ?>
                     </td>

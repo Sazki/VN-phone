@@ -64,7 +64,7 @@ if (isset($_GET['delete'])) {
     }
 
     .orders-table th {
-        background-color: #7b7b7b;
+        background-color: #ecb901;
         ;
         color: white;
         font-weight: bold;
@@ -165,7 +165,7 @@ if (isset($_GET['delete'])) {
     <?php include '../components/admin_header.php' ?>
 
 
-    <h1 class="heading" style="text-align: center; margin-bottom: 20px;">Đơn đặt hàng</h1>
+    <h1 class="heading" style="text-align: center; margin:20px 0; ">Đơn đặt hàng</h1>
 
     <table class="orders-table">
         <thead>

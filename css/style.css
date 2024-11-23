@@ -7,8 +7,6 @@
 	--black: #222;
 	--light-color: #777;
 	--border: 0.2rem solid var(--black);
-
-	--yellow: #cea50f;
 }
 
 * {
@@ -214,9 +212,6 @@ section {
 .header .flex .icons span {
 	font-size: 2rem;
 }
-
-
-
 
 #menu-btn {
 	display: none;
