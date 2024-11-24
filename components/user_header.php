@@ -11,7 +11,10 @@ if (isset($message)) {
 }
 
 ?>
-
+<head>
+    <!-- Thêm Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
 <header class="header">
 
     <section class="flex">
@@ -27,7 +30,6 @@ if (isset($message)) {
         </nav>
 
         <div class="icons">
-
             <?php
             $count_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE userID = ?");
             $count_cart_items->execute([$user_id]);
@@ -51,15 +53,7 @@ if (isset($message)) {
                     style="width: 27px; height: 27px; border-radius: 50%; object-fit: cover;">
             </div>
 
-
-
-
-            <!-- <div id="user-btn" class="fas fa-user"></div> -->
-
-
-
             <div id="menu-btn" class="fas fa-bars"></div>
-
         </div>
 
         <div class="profile">
@@ -92,3 +86,91 @@ if (isset($message)) {
     </section>
 
 </header>
+
+<style>
+    
+    .header {
+    font-family: 'Poppins', sans-serif; /* Sử dụng font Poppins */
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 5%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.header .logo {
+    font-size: 34px; /* Tăng kích thước chữ */
+    font-weight: 700; /* Đậm hơn để nổi bật */
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px; /* Khoảng cách giữa các ký tự */
+    transition: all 0.3s ease;
+}
+
+.header .logo:hover {
+    color: #ffe6d8;
+}
+
+.navbar a {
+    font-size: 16px; /* Tăng kích thước chữ */
+    font-weight: 400; /* Đậm vừa đủ */
+    color: white;
+    margin: 0 12px;
+    text-transform: capitalize;
+    text-decoration: none;
+    letter-spacing: 0.5px; /* Giãn nhẹ ký tự */
+    transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #ffe6d8;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+/* .navbar a:hover::after {
+    width: 100%;
+} */
+
+.icons a {
+    color: white;
+    font-size: 20px; /* Điều chỉnh kích thước icon */
+    margin: 0 10px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.icons a:hover {
+    transform: scale(1.2);
+}
+
+#user-btn img {
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+#user-btn img:hover {
+    transform: scale(1.1);
+}
+
+#menu-btn {
+    color: white;
+    font-size: 24px; /* Tăng kích thước icon menu */
+    cursor: pointer;
+}
+
+</style>

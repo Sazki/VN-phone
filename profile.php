@@ -70,8 +70,8 @@ if (isset($_POST['update_avatar'])) {
 
     <section class="user-details">
 
-        <div class="user">
-            <?php
+    <div class="user" style="margin-top:100px"> 
+    <?php
 
          ?>
             <div class="avatar">

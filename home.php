@@ -29,7 +29,7 @@ include 'components/add_cart.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css\style.css">
 
 </head>
 
@@ -41,15 +41,45 @@ include 'components/add_cart.php';
 
     <section class="hero">
 
-        <div class="swiper hero-slider">
+        <div class="swiper hero-slider" style="margin-top:100px">
 
             <div class="swiper-wrapper">
+            <div class="swiper-slide slide">
+                    <div class="content">
+                        <!-- <span>đặt hàng trực tuyến</span> -->
+                        <h3>Trà Sữa</h3>
+                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                    </div>
+                    <div class="image">
+                        <img src="images/test1.png" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <!-- <span>đặt hàng trực tuyến</span> -->
+                        <h3>Gà rán</h3>
+                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                    </div>
+                    <div class="image">
+                        <img src="images/test2.png" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <!-- <span>đặt hàng trực tuyến</span> -->
+                        <h3>Mỳ gà</h3>
+                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                    </div>
+                    <div class="image">
+                        <img src="images/test3.png" alt="">
+                    </div>
+                </div>
 
                 <div class="swiper-slide slide">
                     <div class="content">
-                        <span>đặt hàng trực tuyến</span>
-                        <h3>pizza</h3>
-                        <a href="menu.php" class="btn">xem thực đơn</a>
+                        <!-- <span>đặt hàng trực tuyến</span> -->
+                        <h3>Pizza</h3>
+                        <a href="menu.php" class="btn">Đặt Hàng</a>
                     </div>
                     <div class="image">
                         <img src="images/home-img-1.png" alt="">
@@ -58,9 +88,9 @@ include 'components/add_cart.php';
 
                 <div class="swiper-slide slide">
                     <div class="content">
-                        <span>đặt hàng trực tuyến</span>
-                        <h3>bánh hamburger phô mai</h3>
-                        <a href="menu.php" class="btn">xem thực đơn</a>
+                        <!-- <span>đặt hàng trực tuyến</span> -->
+                        <h3>Bánh hamburger phô mai</h3>
+                        <a href="menu.php" class="btn">Đặt Hàng</a>
                     </div>
                     <div class="image">
                         <img src="images/home-img-2.png" alt="">
@@ -69,9 +99,9 @@ include 'components/add_cart.php';
 
                 <div class="swiper-slide slide">
                     <div class="content">
-                        <span>đặt hàng trực tuyến</span>
-                        <h3>gà nướng</h3>
-                        <a href="menu.php" class="btn">xem thực đơn</a>
+                        <!-- <span>đặt hàng trực tuyến</span> -->
+                        <h3>Gà nướng</h3>
+                        <a href="menu.php" class="btn">Đặt Hàng</a>
                     </div>
                     <div class="image">
                         <img src="images/home-img-3.png" alt="">
@@ -85,36 +115,136 @@ include 'components/add_cart.php';
         </div>
 
     </section>
+    
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Mục</title>
+    <style>
+        /* Container Styling */
+        .box-container {
+            display: flex;
+            flex-wrap: wrap; /* Cho phép các hộp xuống dòng */
+            gap: 5px; /* Khoảng cách giữa các hộp */
+            justify-content: space-evenly; /* Căn đều các hộp, kể cả khoảng trống */
+            padding: 5px; /* Thêm khoảng cách giữa container và các cạnh màn hình */
+            box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+        }
 
+        /* Individual Box Styling */
+        .box-show {
+            position: relative;
+            width: 280px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease-in-out;
+            background: #f3f3f3;
+        }
+
+        .box-show img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease-in-out;
+        }
+
+        .box-show .info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .box-show .overlay {
+            position: absolute;
+            bottom: -60px; /* Ban đầu ở ngoài khung */
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.5s ease-in-out;
+            z-index: 2;
+            opacity: 0;
+        }
+
+        /* Hover Effects */
+        .box-show:hover {
+            transform: scale(1.05);
+        }
+
+        .box-show:hover img {
+            filter: brightness(0.8);
+        }
+
+        .box-show:hover .info {
+            opacity: 0;
+            transform: translateY(-20px); /* Đẩy nội dung lên trên khi ẩn */
+        }
+
+        .box-show:hover .overlay {
+            bottom: 0; /* Hiện overlay lên khi hover */
+            opacity: 1;
+        }
+
+        /* Section Title Styling */
+        .category .title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
     <section class="category">
-
-        <h1 class="title">food category</h1>
-
+        <h1 class="title">Danh mục</h1>
         <div class="box-container">
-
-            <a href="category.php?category=thức ăn nhanh" class="box">
-                <img src="images/cat-1.png" alt="">
-                <h3>thức ăn nhanh</h3>
+            <a href="category.php?category=thức ăn nhanh" class="box-show">
+                <img src="images/doannhanh.jpg" alt="Thức ăn nhanh">
+                <div class="info">Thức ăn nhanh</div>
+                <div class="overlay">Đặt Mua</div>
             </a>
 
-            <a href="category.php?category=món ăn chính" class="box">
-                <img src="images/cat-2.png" alt="">
-                <h3>món ăn chính</h3>
+            <a href="category.php?category=món ăn chính" class="box-show">
+                <img src="images/monan.jpg" alt="Món ăn chính">
+                <div class="info">Món ăn chính</div>
+                <div class="overlay">Đặt Mua</div>
             </a>
 
-            <a href="category.php?category=đồ uống" class="box">
-                <img src="images/cat-3.png" alt="">
-                <h3>đồ uống</h3>
+            <a href="category.php?category=đồ uống" class="box-show">
+                <img src="images/douong.jpg" alt="Đồ uống">
+                <div class="info">Đồ uống</div>
+                <div class="overlay">Đặt Mua</div>
             </a>
 
-            <a href="category.php?category=món tráng miệng" class="box">
-                <img src="images/cat-4.png" alt="">
-                <h3>món tráng miệng</h3>
+            <a href="category.php?category=món tráng miệng" class="box-show">
+                <img src="images/trangmieng.jpg" alt="Món tráng miệng">
+                <div class="info">Món tráng miệng</div>
+                <div class="overlay">Đặt Mua</div>
             </a>
-
         </div>
-
     </section>
+</body>
+</html>
+
+
 
 
 
@@ -161,21 +291,6 @@ include 'components/add_cart.php';
         </div>
 
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -60,16 +60,16 @@ $grand_total = 0;
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-    <div class="heading">
+      <!-- <div class="heading">
         <h3>giỏ hàng</h3>
         <p><a href="home.php">trang chủ</a> <span> / giỏ hàng</span></p>
-    </div>
+    </div> -->
 
     <!-- shopping cart section starts  -->
 
     <section class="products">
 
-        <h1 class="title">giỏ hàng của bạn</h1>
+        <h1 class="title" style="margin-top:100px">giỏ hàng của bạn</h1>
 
         <div class="box-container">
 

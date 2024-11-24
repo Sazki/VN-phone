@@ -37,16 +37,16 @@ include 'components/add_cart.php';
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-    <div class="heading">
+      <!-- <div class="heading">
         <h3>Thực đơn</h3>
         <p><a href="home.php">Trang chủ</a> <span> / thực đơn</span></p>
-    </div>
+    </div> -->
 
     <!-- menu section starts  -->
 
     <section class="products">
 
-        <h1 class="title">Danh sách thực phẩm</h1>
+        <h1 class="title" style="margin-top:100px">Danh sách thực phẩm</h1>
 
         <div class="box-container">
 

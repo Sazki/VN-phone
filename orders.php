@@ -69,14 +69,14 @@ if (isset($_POST['confirm_received'])) {
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-    <div class="heading">
+    <!-- <div class="heading">
         <h3>đơn đặt hàng</h3>
         <p><a href="html.php">trang chủ</a> <span> / đơn đặt hàng</span></p>
-    </div>
+    </div> -->
 
     <section class="orders">
 
-        <h1 class="title">đơn hàng của bạn</h1>
+        <h1 class="title" style="margin-top:100px">đơn hàng của bạn</h1>
 
         <div class="box-container">
 

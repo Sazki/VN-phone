@@ -40,7 +40,7 @@ $category = htmlspecialchars($category, ENT_QUOTES, 'UTF-8'); // Làm sạch bi�
 
     <section class="products">
 
-        <h1 class="title"><?php echo $category; ?></h1>
+    <h1 class="title" style="margin-top: 100px;"><?php echo $category; ?></h1>
 
         <div class="box-container">
 

@@ -56,16 +56,16 @@ if (isset($_POST['send'])) {
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-    <div class="heading">
+    <!-- <div class="heading">
         <h3>liên hệ với chúng tôi</h3>
         <p><a href="home.php">trang chủ</a> <span> / liên hệ</span></p>
-    </div>
+    </div> -->
 
     <!-- contact section starts  -->
 
     <section class="contact">
 
-        <div class="row">
+        <div class="row" style="margin-top:100px">
 
             <div class="image">
                 <img src="images/contact-img.svg" alt="">

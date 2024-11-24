@@ -18,7 +18,7 @@ if(isset($_SESSION['user_id'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>about</title>
+   <title>About VNFood</title>
 
    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 
@@ -35,25 +35,20 @@ if(isset($_SESSION['user_id'])){
 <?php include 'components/user_header.php'; ?>
 <!-- header section ends -->
 
-<div class="heading">
-   <h3>about us</h3>
-   <p><a href="home.php">home</a> <span> / about</span></p>
-</div>
-
 <!-- about section starts  -->
 
 <section class="about">
 
-   <div class="row">
+   <div class="row" style="margin-top:100px">
 
       <div class="image">
-         <img src="images/about-img.svg" alt="">
+         <img src="images/about-img.svg" alt="About VNFood">
       </div>
 
       <div class="content">
-         <h3>why choose us?</h3>
-         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, neque debitis incidunt qui ipsum sed doloremque a molestiae in veritatis ullam similique sunt aliquam dolores dolore? Quasi atque debitis nobis!</p>
-         <a href="menu.html" class="btn">our menu</a>
+         <h3>Tại sao nên chọn VNFood?</h3>
+         <p>VNFood tự hào là thương hiệu đồ ăn nhanh hàng đầu, mang đến hương vị Việt Nam đậm đà kết hợp với phong cách hiện đại. Với nguyên liệu tươi ngon, dịch vụ nhanh chóng và menu đa dạng, chúng tôi cam kết mang lại trải nghiệm tuyệt vời nhất cho khách hàng.</p>
+         <a href="menu.html" class="btn">Đặt hàng ngay</a>
       </div>
 
    </div>
@@ -66,26 +61,26 @@ if(isset($_SESSION['user_id'])){
 
 <section class="steps">
 
-   <h1 class="title">simple steps</h1>
+   <h1 class="title">Phương Châm</h1>
 
    <div class="box-container">
 
       <div class="box">
-         <img src="images/step-1.png" alt="">
-         <h3>choose order</h3>
-         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, dolorem.</p>
+         <img src="images/step-1.png" alt="Choose Your Order">
+         <h3>Đặt hàng dễ dàng</h3>
+         <p>Dễ dàng chọn món yêu thích từ menu phong phú của chúng tôi, bao gồm burger, pizza, gà rán, và nhiều món khác.</p>
       </div>
 
       <div class="box">
-         <img src="images/step-2.png" alt="">
-         <h3>fast delivery</h3>
-         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, dolorem.</p>
+         <img src="images/step-2.png" alt="Fast Delivery">
+         <h3>Giao hàng nhanh</h3>
+         <p>Chúng tôi giao hàng nhanh chóng đến tận cửa để bạn có thể thưởng thức món ăn nóng hổi, tươi ngon.</p>
       </div>
 
       <div class="box">
-         <img src="images/step-3.png" alt="">
-         <h3>enjoy food</h3>
-         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, dolorem.</p>
+         <img src="images/step-3.png" alt="Enjoy Your Food">
+         <h3>Chất lượng tốt nhất</h3>
+         <p>Thưởng thức hương vị tuyệt vời và chia sẻ những khoảnh khắc đáng nhớ cùng gia đình và bạn bè.</p>
       </div>
 
    </div>
@@ -98,15 +93,15 @@ if(isset($_SESSION['user_id'])){
 
 <section class="reviews">
 
-   <h1 class="title">customer's reivews</h1>
+   <h1 class="title">Đánh giá của khách hàng</h1>
 
    <div class="swiper reviews-slider">
 
       <div class="swiper-wrapper">
 
          <div class="swiper-slide slide">
-            <img src="images/pic-1.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate eligendi laborum molestias ut earum nulla sint voluptatum labore nemo.</p>
+            <img src="images/pic-1.png" alt="Customer 1">
+            <p>VNFood thực sự tuyệt vời! Đồ ăn ngon, giao hàng nhanh, và nhân viên rất nhiệt tình.</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -114,72 +109,33 @@ if(isset($_SESSION['user_id'])){
                <i class="fas fa-star"></i>
                <i class="fas fa-star-half-alt"></i>
             </div>
-            <h3>john deo</h3>
+            <h3>Nguyễn Văn A</h3>
          </div>
 
          <div class="swiper-slide slide">
-            <img src="images/pic-2.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate eligendi laborum molestias ut earum nulla sint voluptatum labore nemo.</p>
+            <img src="images/pic-2.png" alt="Customer 2">
+            <p>Đây là địa chỉ ăn nhanh yêu thích của tôi! Hương vị chuẩn Việt Nam, đáng để thử.</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
-               <i class="fas fa-star-half-alt"></i>
+               <i class="fas fa-star"></i>
             </div>
-            <h3>john deo</h3>
+            <h3>Trần Thị B</h3>
          </div>
 
          <div class="swiper-slide slide">
-            <img src="images/pic-3.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate eligendi laborum molestias ut earum nulla sint voluptatum labore nemo.</p>
+            <img src="images/pic-3.png" alt="Customer 3">
+            <p>Tôi rất thích gà của VNFood. Không chỉ ngon mà còn chất lượng hơn cả mong đợi!</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
-               <i class="fas fa-star-half-alt"></i>
+               <i class="fas fa-star"></i>
             </div>
-            <h3>john deo</h3>
-         </div>
-
-         <div class="swiper-slide slide">
-            <img src="images/pic-4.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate eligendi laborum molestias ut earum nulla sint voluptatum labore nemo.</p>
-            <div class="stars">
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star-half-alt"></i>
-            </div>
-            <h3>john deo</h3>
-         </div>
-
-         <div class="swiper-slide slide">
-            <img src="images/pic-5.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate eligendi laborum molestias ut earum nulla sint voluptatum labore nemo.</p>
-            <div class="stars">
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star-half-alt"></i>
-            </div>
-            <h3>john deo</h3>
-         </div>
-
-         <div class="swiper-slide slide">
-            <img src="images/pic-6.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate eligendi laborum molestias ut earum nulla sint voluptatum labore nemo.</p>
-            <div class="stars">
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star-half-alt"></i>
-            </div>
-            <h3>john deo</h3>
+            <h3>Hoàng Minh C</h3>
          </div>
 
       </div>
@@ -192,32 +148,9 @@ if(isset($_SESSION['user_id'])){
 
 <!-- reviews section ends -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- footer section starts  -->
 <?php include 'components/footer.php'; ?>
-<!-- footer section ends -->=
-
-
-
-
-
+<!-- footer section ends -->
 
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 

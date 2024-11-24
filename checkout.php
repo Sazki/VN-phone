@@ -68,14 +68,14 @@ if (isset($_POST['submit'])) {
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-    <div class="heading">
+    <!-- <div class="heading" >
         <h3>Thanh toán</h3>
         <p><a href="home.php">Trang chủ</a> <span> / Thanh toán</span></p>
-    </div>
+    </div> -->
 
     <section class="checkout">
 
-        <h1 class="title">tóm tắt đơn hàng</h1>
+        <h1 class="title" style="margin-top: 100px;">tóm tắt đơn hàng</h1>
 
         <form action="" method="post">
 
