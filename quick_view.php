@@ -4,10 +4,10 @@ include 'components/connect.php';
 
 session_start();
 
-if(isset($_SESSION['user_id'])){
-   $user_id = $_SESSION['user_id'];
-}else{
-   $user_id = '';
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $user_id = '';
 };
 
 include 'components/add_cart.php';
@@ -40,12 +40,12 @@ include 'components/add_cart.php';
         <h1 class="title">xem nhanh</h1>
 
         <?php
-      $pid = $_GET['pid'];
-      $select_products = $conn->prepare("SELECT * FROM `products` WHERE productID = ?");
-      $select_products->execute([$pid]);
-      if($select_products->rowCount() > 0){
-         while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
-   ?>
+        $pid = $_GET['pid'];
+        $select_products = $conn->prepare("SELECT * FROM `products` WHERE productID = ?");
+        $select_products->execute([$pid]);
+        if ($select_products->rowCount() > 0) {
+            while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
+        ?>
         <form action="" method="post" class="box">
             <input type="hidden" name="pid" value="<?= $fetch_products['productID']; ?>">
             <input type="hidden" name="name" value="<?= $fetch_products['productName']; ?>">
@@ -54,19 +54,19 @@ include 'components/add_cart.php';
             <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
             <a href="category.php?category=<?= $fetch_products['category']; ?>"
                 class="cat"><?= $fetch_products['category']; ?></a>
-            <div class="name"><?= $fetch_products['name']; ?></div>
+            <div class="name"><?= $fetch_products['productName']; ?></div>
             <div class="flex">
-                <div class="price"><span>$</span><?= $fetch_products['price']; ?></div>
+                <div class="price"><?= $fetch_products['price']; ?>k</div>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
             </div>
-            <button type="submit" name="add_to_cart" class="cart-btn">add to cart</button>
+            <button type="submit" name="add_to_cart" class="cart-btn">Thêm vào giỏ hàng</button>
         </form>
         <?php
-         }
-      }else{
-         echo '<p class="empty">không tìm thấy sản phẩm nào!</p>';
-      }
-   ?>
+            }
+        } else {
+            echo '<p class="empty">không tìm thấy sản phẩm nào!</p>';
+        }
+        ?>
 
     </section>
 

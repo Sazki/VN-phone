@@ -16,7 +16,7 @@ if (isset($_POST['confirm_received'])) {
    $order_id = $_POST['order_id'];
    $update_status = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
    $update_status->execute(['đã giao hàng', $order_id]);
-   $message[] = 'Trạng thái đơn hàng đã được cập nhật thành "Đã giao hàng".';
+   $message[] = 'Chúc mừng bạn đã nhận đơn hàng thành công .';
 }
 
 ?>

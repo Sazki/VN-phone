@@ -60,7 +60,7 @@ $grand_total = 0;
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-      <!-- <div class="heading">
+    <!-- <div class="heading">
         <h3>giỏ hàng</h3>
         <p><a href="home.php">trang chủ</a> <span> / giỏ hàng</span></p>
     </div> -->

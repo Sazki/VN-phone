@@ -96,6 +96,41 @@ section {
 }
 
 .message {
+	position: fixed; /* Sử dụng fixed để cố định vị trí trên màn hình */
+	top: 150px; /* Cách phía trên 150px */
+	right: 20px; /* Cách bên phải 20px */
+	max-width: 300px; /* Giới hạn chiều rộng để trông gọn hơn */
+	padding: 1.5rem; /* Thêm khoảng cách bên trong */
+	background-color: var(--main-color); /* Màu nền */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng để tạo chiều sâu */
+	border-radius: 8px; /* Bo góc phần tử */
+	display: flex; /* Sử dụng flexbox để sắp xếp nội dung */
+	align-items: center; /* Căn giữa nội dung theo chiều dọc */
+	gap: 1rem; /* Khoảng cách giữa các nội dung bên trong */
+	z-index: 1000; /* Đảm bảo phần tử nằm trên các phần tử khác */
+	transition: transform 0.3s ease, opacity 0.3s ease; /* Hiệu ứng mượt khi ẩn/hiện */
+}
+
+.message.hidden {
+	transform: translateX(100%); /* Trượt phần tử ra khỏi màn hình */
+	opacity: 0; /* Làm mờ phần tử */
+}
+.message span {
+	font-size: 2rem;
+	color: var(--black);
+}
+
+.message i {
+	font-size: 2.5rem;
+	color: var(--red);
+	cursor: pointer;
+}
+
+.message i:hover {
+	color: var(--black);
+}
+
+/* .message {
 	position: sticky;
 	top: 0;
 	max-width: 1200px;
@@ -121,7 +156,7 @@ section {
 
 .message i:hover {
 	color: var(--black);
-}
+} */
 
 .heading {
 	text-align: center;

@@ -1,14 +1,15 @@
 <?php
 if (isset($message)) {
-    foreach ($message as $message) {
+    foreach ($message as $msg) {
         echo '
       <div class="message">
-         <span>' . $message . '</span>
+         <span>' . $msg . '</span>
          <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
       </div>
       ';
     }
 }
+
 ?>
 
 <header class="header">
@@ -23,6 +24,7 @@ if (isset($message)) {
             <a href="placed_orders.php">Đơn đặt hàng</a>
             <a href="admin_accounts.php">Quản trị viên</a>
             <a href="users_accounts.php">Người dùng</a>
+            <a href="discounts.php">Mã giảm giá</a>
             <a href="messages.php">Tin nhắn</a>
         </nav>
 

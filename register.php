@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-    <section class="form-container">
+    <section class="form-container" style="margin-top: 100px;">
 
         <form action="" method="post">
             <h3>Đăng ký tài khoản</h3>
@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
                 title="Vui lòng nhập số điện thoại hợp lệ (chính xác 10 chữ số)">
             <input type="password" name="pass" required placeholder="nhập mật khẩu của bạn" class="box" maxlength="50"
                 oninput="this.value = this.value.replace(/\s/g, '')">
-            <input type="password" name="cpass" required placeholder="confirm your password" class="box" maxlength="50"
+            <input type="password" name="cpass" required placeholder="Xác nhận mật khẩu" class="box" maxlength="50"
                 oninput="this.value = this.value.replace(/\s/g, '')">
             <input type="submit" value="Đăng ký" name="submit" class="btn">
             <p>Đã có tài khoản? <a href="login.php">Đăng nhập ngay</a></p>

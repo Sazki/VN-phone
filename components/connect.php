@@ -1,9 +1,7 @@
 <?php
 
-$db_name = 'mysql:host=localhost;dbname=food_db';
+$db_name = 'mysql:host=localhost;dbname=online_food';
 $user_name = 'root';
-$user_password = 'nam19012005';
+$user_password = '';
 
 $conn = new PDO($db_name, $user_name, $user_password);
-
-?>

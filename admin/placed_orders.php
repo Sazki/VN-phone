@@ -26,7 +26,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Phân trang
-$orders_per_page = 3; // Số đơn hàng trên mỗi trang
+$orders_per_page = 5; // Số đơn hàng trên mỗi trang
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Trang hiện tại
 $start_from = ($page - 1) * $orders_per_page; // Vị trí bắt đầu truy vấn
 
@@ -52,6 +52,8 @@ $total_pages = ceil($total_orders / $orders_per_page); // Tính tổng số tran
 
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- custom css file link -->
     <link rel="stylesheet" href="../css/admin_style.css">
@@ -135,6 +137,10 @@ $total_pages = ceil($total_orders / $orders_per_page); // Tính tổng số tran
         border: none;
         display: inline-block;
         background-color: #007bff;
+    }
+
+    .btn-success {
+        background-color: #28a745;
     }
 
     .btn-primary {
@@ -295,13 +301,15 @@ $total_pages = ceil($total_orders / $orders_per_page); // Tính tổng số tran
                         <?php if ($fetch_orders['payment_status'] === 'chờ giao hàng') { ?>
                         <form action="" method="POST">
                             <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
-                            <button type="submit" class="btn btn-primary" name="update_payment">Giao hàng</button>
+                            <button type="submit" class="btn btn-success" name="update_payment"><i
+                                    class="fa-solid fa-truck-fast"></i></button>
                         </form>
                         <?php } ?>
                         <a href="generate_invoice.php?order_id=<?= $fetch_orders['id']; ?>" class="btn btn-primary"
-                            target="_blank">In</a>
+                            target="_blank"><i class="fa-solid fa-print"></i></a>
                         <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="btn btn-danger"
-                            onclick="return confirm('Bạn có chắc chắn muốn xóa đơn này không?');">Xóa</a>
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa đơn này không?');"><i
+                                class='bx bx-trash'></i></a>
                     </div>
                 </td>
             </tr>

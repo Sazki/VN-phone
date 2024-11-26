@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 
     <?php include 'components/user_header.php' ?>
 
-    <section class="form-container">
+    <section class="form-container" style="margin-top: 100px;">
 
         <form action="" method="post">
             <h3>địa chỉ của bạn</h3>

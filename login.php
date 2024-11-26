@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
     <?php include 'components/user_header.php'; ?>
     <!-- header section ends -->
 
-    <section class="form-container">
+    <section class="form-container" style="margin-top: 100px;">
 
         <form action="" method="post">
             <h3>Đăng nhập tài khoản</h3>

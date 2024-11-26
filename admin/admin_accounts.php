@@ -54,6 +54,8 @@ $select_account->execute(['admin']);
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- custom css file link  -->
     <link rel="stylesheet" href="../css/admin_style.css">
 
@@ -202,7 +204,7 @@ $select_account->execute(['admin']);
                     <th>ID</th>
                     <th>Tên quản trị viên</th>
                     <th>Email</th>
-                    <th>Hành động</th>
+                    <th style="width: 50px;">Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -216,9 +218,10 @@ $select_account->execute(['admin']);
                     <td><?= $fetch_accounts['email']; ?></td>
                     <td class="action-buttons">
                         <a href="admin_accounts.php?delete=<?= $fetch_accounts['userID']; ?>" class="delete-btn"
-                            onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?');">Xóa</a>
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?');"><i
+                                class='bx bx-trash'></i></a>
                         <?php if ($fetch_accounts['userID'] == $admin_id): ?>
-                        <a href="update_profile.php" class="option-btn">Sửa</a>
+                        <a href="update_profile.php" class="option-btn"><i class='bx bx-edit'></i></a>
                         <?php endif; ?>
                     </td>
                 </tr>

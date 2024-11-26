@@ -50,6 +50,8 @@ $total_pages = ceil($total_users / $users_per_page); // Tổng số trang
     <!-- Font Awesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- Custom CSS File Link -->
     <link rel="stylesheet" href="../css/admin_style.css">
 
@@ -193,7 +195,7 @@ $total_pages = ceil($total_users / $users_per_page); // Tổng số trang
                     <th>Email</th>
                     <th>Số điện thoại</th>
                     <th>Địa chỉ</th>
-                    <th>Hành động</th>
+                    <th style="width: 50px;">Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -210,7 +212,8 @@ $total_pages = ceil($total_users / $users_per_page); // Tổng số trang
                     <td><?= $fetch_accounts['address']; ?></td>
                     <td class="actions">
                         <a href="users_accounts.php?delete=<?= $fetch_accounts['userID']; ?>" class="delete-btn"
-                            onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?');">Xóa</a>
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?');"><i
+                                class='bx bx-trash'></i></a>
                     </td>
                 </tr>
                 <?php

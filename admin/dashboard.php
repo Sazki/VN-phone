@@ -55,20 +55,20 @@ if (!isset($admin_id)) {
                 $numbers_of_pendings = $select_pendings->rowCount();
                 ?>
                 <h3><?= $numbers_of_pendings; ?></h3>
-                <p>tổng số đơn hàng đang chờ xử lý</p>
-                <a href="placed_orders.php" class="btn">xem đơn hàng</a>
+                <p>Số đơn đang chờ xử lý</p>
+                <a href="placed_orders_pending.php" class="btn">xem đơn hàng</a>
             </div>
 
             <div class="box">
                 <?php
-                $total_completes = 0;
-                $select_completes = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-                $select_completes->execute(['Đã giao hàng']);
-                $numbers_of_completes = $select_completes->rowCount();
+                $total_discounts = 0;
+                $select_discounts = $conn->prepare("SELECT * FROM `discounts`");
+                $select_discounts->execute();  // Thay 'active' với trạng thái phù hợp trong hệ thống của bạn
+                $numbers_of_discounts = $select_discounts->rowCount();
                 ?>
-                <h3><?= $numbers_of_completes; ?></h3>
-                <p>tổng số đơn hàng đã giao</p>
-                <a href="placed_orders.php" class="btn">Xem đơn hàng</a>
+                <h3><?= $numbers_of_discounts; ?></h3>
+                <p>Số mã giảm giá</p>
+                <a href="discounts.php" class="btn">Xem mã giảm giá</a>
             </div>
 
             <div class="box">
