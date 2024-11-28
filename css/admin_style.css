@@ -77,17 +77,23 @@ section {
 }
 
 .delete-btn {
-	background-color: var(--red);
+	background-color: #dc3545;
 }
 
 .option-btn {
-	background-color: var(--orange);
+	background-color: #007bff;
 }
 
-.btn:hover,
-.delete-btn:hover,
-.option-btn:hover {
+.btn:hover {
 	background-color: var(--black);
+}
+
+.option-btn:hover {
+	background-color: #0056b3;
+}
+
+.delete-btn:hover {
+	background-color: #c82333;
 }
 
 .flex-btn {

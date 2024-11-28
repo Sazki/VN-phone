@@ -44,7 +44,7 @@ include 'components/add_cart.php';
         <div class="swiper hero-slider" style="margin-top:100px">
 
             <div class="swiper-wrapper">
-            <div class="swiper-slide slide">
+                <div class="swiper-slide slide">
                     <div class="content">
                         <!-- <span>đặt hàng trực tuyến</span> -->
                         <h3>Trà Sữa</h3>
@@ -115,22 +115,28 @@ include 'components/add_cart.php';
         </div>
 
     </section>
-    
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh Mục</title>
-    <style>
+
+    <!DOCTYPE html>
+    <html lang="vi">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Danh Mục</title>
+        <style>
         /* Container Styling */
         .box-container {
             display: flex;
-            flex-wrap: wrap; /* Cho phép các hộp xuống dòng */
-            gap: 5px; /* Khoảng cách giữa các hộp */
-            justify-content: space-evenly; /* Căn đều các hộp, kể cả khoảng trống */
-            padding: 5px; /* Thêm khoảng cách giữa container và các cạnh màn hình */
-            box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+            flex-wrap: wrap;
+            /* Cho phép các hộp xuống dòng */
+            gap: 5px;
+            /* Khoảng cách giữa các hộp */
+            justify-content: space-evenly;
+            /* Căn đều các hộp, kể cả khoảng trống */
+            padding: 5px;
+            /* Thêm khoảng cách giữa container và các cạnh màn hình */
+            box-sizing: border-box;
+            /* Đảm bảo padding không làm thay đổi kích thước */
         }
 
         /* Individual Box Styling */
@@ -170,7 +176,8 @@ include 'components/add_cart.php';
 
         .box-show .overlay {
             position: absolute;
-            bottom: -60px; /* Ban đầu ở ngoài khung */
+            bottom: -60px;
+            /* Ban đầu ở ngoài khung */
             left: 0;
             right: 0;
             background: rgba(0, 0, 0, 0.7);
@@ -195,11 +202,13 @@ include 'components/add_cart.php';
 
         .box-show:hover .info {
             opacity: 0;
-            transform: translateY(-20px); /* Đẩy nội dung lên trên khi ẩn */
+            transform: translateY(-20px);
+            /* Đẩy nội dung lên trên khi ẩn */
         }
 
         .box-show:hover .overlay {
-            bottom: 0; /* Hiện overlay lên khi hover */
+            bottom: 0;
+            /* Hiện overlay lên khi hover */
             opacity: 1;
         }
 
@@ -210,39 +219,41 @@ include 'components/add_cart.php';
             margin-bottom: 20px;
             color: #333;
         }
-    </style>
-</head>
-<body>
-    <section class="category">
-        <h1 class="title">Danh mục</h1>
-        <div class="box-container">
-            <a href="category.php?category=thức ăn nhanh" class="box-show">
-                <img src="images/doannhanh.jpg" alt="Thức ăn nhanh">
-                <div class="info">Thức ăn nhanh</div>
-                <div class="overlay">Đặt Mua</div>
-            </a>
+        </style>
+    </head>
 
-            <a href="category.php?category=món ăn chính" class="box-show">
-                <img src="images/monan.jpg" alt="Món ăn chính">
-                <div class="info">Món ăn chính</div>
-                <div class="overlay">Đặt Mua</div>
-            </a>
+    <body>
+        <section class="category">
+            <h1 class="title">Danh mục</h1>
+            <div class="box-container">
+                <a href="category.php?category=thức ăn nhanh" class="box-show">
+                    <img src="images/doannhanh.jpg" alt="Thức ăn nhanh">
+                    <div class="info">Thức ăn nhanh</div>
+                    <div class="overlay">Đặt Mua</div>
+                </a>
 
-            <a href="category.php?category=đồ uống" class="box-show">
-                <img src="images/douong.jpg" alt="Đồ uống">
-                <div class="info">Đồ uống</div>
-                <div class="overlay">Đặt Mua</div>
-            </a>
+                <a href="category.php?category=món ăn chính" class="box-show">
+                    <img src="images/monan.jpg" alt="Món ăn chính">
+                    <div class="info">Món ăn chính</div>
+                    <div class="overlay">Đặt Mua</div>
+                </a>
 
-            <a href="category.php?category=món tráng miệng" class="box-show">
-                <img src="images/trangmieng.jpg" alt="Món tráng miệng">
-                <div class="info">Món tráng miệng</div>
-                <div class="overlay">Đặt Mua</div>
-            </a>
-        </div>
-    </section>
-</body>
-</html>
+                <a href="category.php?category=đồ uống" class="box-show">
+                    <img src="images/douong.jpg" alt="Đồ uống">
+                    <div class="info">Đồ uống</div>
+                    <div class="overlay">Đặt Mua</div>
+                </a>
+
+                <a href="category.php?category=món tráng miệng" class="box-show">
+                    <img src="images/trangmieng.jpg" alt="Món tráng miệng">
+                    <div class="info">Món tráng miệng</div>
+                    <div class="overlay">Đặt Mua</div>
+                </a>
+            </div>
+        </section>
+    </body>
+
+    </html>
 
 
 
@@ -292,6 +303,10 @@ include 'components/add_cart.php';
 
     </section>
 
+    <div id="vnfood-loader-container">
+        <div class="vnfood-loader">VNFood</div>
+    </div>
+
 
 
     <?php include 'components/footer.php'; ?>
@@ -311,6 +326,12 @@ include 'components/add_cart.php';
             el: ".swiper-pagination",
             clickable: true,
         },
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const loaderContainer = document.getElementById('vnfood-loader-container');
+        setTimeout(() => {
+            loaderContainer.style.display = 'none'; // Ẩn loader sau 2.5 giây
+        }, 2500); // Thời gian khớp với animation (2.5s)
     });
     </script>
 

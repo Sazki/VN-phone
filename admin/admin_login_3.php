@@ -7,9 +7,10 @@ session_start();
 if (isset($_POST['submit'])) {
 
    $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
+
    $pass = htmlspecialchars($_POST['pass'], ENT_QUOTES, 'UTF-8');
 
-   // Lấy thông tin người dùng từ cơ sở dữ liệu dựa vào email
+   // Lấy thông tin người dùng từ cơ sở dữ liệu chỉ dựa vào tên
    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
    $select_user->execute([$email]);
 
@@ -42,14 +43,14 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
+    <title>login</title>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="../css/style_login_admin.css" />
+    <link rel="stylesheet" href="../css/admin_style.css">
+
 </head>
 
 <body>
@@ -67,29 +68,33 @@ if (isset($_POST['submit'])) {
    }
    ?>
 
-    <!-- admin login form section starts -->
-    <section>
-        <div class="form-box">
-            <div class="form-value">
-                <form action="" method="POST">
-                    <h2>Đăng nhập Admin</h2>
-                    <div class="inputbox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" name="email" maxlength="50" required placeholder="Nhập email của bạn" />
-                    </div>
-                    <div class="inputbox">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" name="pass" maxlength="50" required
-                            placeholder="Nhập mật khẩu của bạn" />
-                    </div>
-                    <button type="submit" name="submit">Đăng nhập</button>
-                </form>
-            </div>
-        </div>
+    <!-- admin login form section starts  -->
+
+    <section class="form-container">
+
+        <form action="" method="POST">
+            <h3>đăng nhập quản trị viên</h3>
+            <input type="email" name="email" maxlength="20" required placeholder="nhập email quản trị của bạn"
+                class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+            <input type="password" name="pass" maxlength="20" required placeholder="nhập mật khẩu của bạn" class="box"
+                oninput="this.value = this.value.replace(/\s/g, '')">
+            <input type="submit" value="Đăng nhập ngay" name="submit" class="btn">
+        </form>
+
     </section>
+
     <!-- admin login form section ends -->
 
-    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>

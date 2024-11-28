@@ -1,0 +1,170 @@
+:root {
+	/* --main-color: #4834d4; */
+	--main-color: #e5b402e3;
+	--red: #e74c3c;
+	--orange: #c37a06;
+	--black: #34495e;
+	--white: #fff;
+	--light-bg: #f5f5f5;
+	--light-color: #999;
+	--border: 0.2rem solid var(--black);
+	--box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	width: 100%;
+	background: url('../images/2.png') no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.form-box {
+	position: relative;
+	width: 400px;
+	height: 450px;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	backdrop-filter: blur(15px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.message {
+	position: fixed; /* Sử dụng fixed để cố định vị trí trên màn hình */
+	top: 150px; /* Cách phía trên 150px */
+	right: 20px; /* Cách bên phải 20px */
+	max-width: 300px; /* Giới hạn chiều rộng để trông gọn hơn */
+	padding: 1.5rem; /* Thêm khoảng cách bên trong */
+	background-color: var(--main-color); /* Màu nền */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng để tạo chiều sâu */
+	border-radius: 8px; /* Bo góc phần tử */
+	display: flex; /* Sử dụng flexbox để sắp xếp nội dung */
+	align-items: center; /* Căn giữa nội dung theo chiều dọc */
+	gap: 1rem; /* Khoảng cách giữa các nội dung bên trong */
+	z-index: 1000; /* Đảm bảo phần tử nằm trên các phần tử khác */
+	transition: transform 0.3s ease, opacity 0.3s ease; /* Hiệu ứng mượt khi ẩn/hiện */
+}
+
+.message.hidden {
+	transform: translateX(100%); /* Trượt phần tử ra khỏi màn hình */
+	opacity: 0; /* Làm mờ phần tử */
+}
+.message span {
+	font-size: 1rem;
+	color: var(--black);
+}
+
+.message i {
+	font-size: 2.5rem;
+	color: var(--red);
+	cursor: pointer;
+}
+
+.message i:hover {
+	color: var(--black);
+}
+
+h2 {
+	font-size: 2em;
+	/* color: #fff; */
+	color: black;
+	text-align: center;
+}
+
+.inputbox {
+	position: relative;
+	margin: 30px 0;
+	width: 310px;
+	border-bottom: 2px solid #fff;
+}
+
+.inputbox {
+	position: relative;
+	width: 100%;
+}
+
+.inputbox input {
+	width: 100%;
+	padding: 10px 5px;
+	font-size: 1em;
+	border: 1px solid #ccc;
+	outline: none;
+	background: none;
+	color: #fff;
+}
+
+.inputbox label {
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	transform: translateY(-50%);
+	color: #fff;
+	font-size: 1em;
+	pointer-events: none;
+	transition: 0.5s;
+}
+
+/* Khi input có giá trị */
+input:not(:placeholder-shown) ~ label {
+	top: -5px;
+}
+
+.inputbox input {
+	width: 100%;
+	height: 50px;
+	background: transparent;
+	border: none;
+	outline: none;
+	font-size: 1em;
+	padding: 0 35px 0 5px;
+	color: black;
+}
+
+.inputbox ion-icon {
+	position: absolute;
+	right: 8px;
+	color: #fff;
+	font-size: 1.2em;
+	top: 20px;
+}
+
+button {
+	width: 100%;
+	height: 40px;
+	border-radius: 40px;
+	background: #fff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: 600;
+}
+
+.register {
+	font-size: 0.9em;
+	color: #fff;
+	text-align: center;
+	margin: 25px 0 10px;
+}
+
+.register p a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: 600;
+}
+
+.register p a:hover {
+	text-decoration: underline;
+}

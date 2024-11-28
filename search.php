@@ -41,7 +41,7 @@ include 'components/add_cart.php';
 
     <section class="search-form">
         <form method="post" action="" style="margin-top: 100px">
-            <input type="text" name="search_box" placeholder="search here..." class="box">
+            <input type="text" name="search_box" placeholder="Tìm kiếm ở đây" class="box">
             <button type="submit" name="search_btn" class="fas fa-search"></button>
         </form>
     </section>
@@ -60,23 +60,23 @@ include 'components/add_cart.php';
                 if ($select_products->rowCount() > 0) {
                     while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
             ?>
-            <form action="" method="post" class="box">
-                <input type="hidden" name="pid" value="<?= $fetch_products['productID']; ?>">
-                <input type="hidden" name="name" value="<?= $fetch_products['productName']; ?>">
-                <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
-                <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
-                <a href="quick_view.php?pid=<?= $fetch_products['productID']; ?>" class="fas fa-eye"></a>
-                <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
-                <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-                <a href="category.php?category=<?= $fetch_products['category']; ?>"
-                    class="cat"><?= $fetch_products['category']; ?></a>
-                <div class="name"><?= $fetch_products['productName']; ?></div>
-                <div class="flex">
-                    <div class="price"><span>$</span><?= $fetch_products['price']; ?></div>
-                    <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
-                </div>
-            </form>
-            <?php
+                        <form action="" method="post" class="box">
+                            <input type="hidden" name="pid" value="<?= $fetch_products['productID']; ?>">
+                            <input type="hidden" name="name" value="<?= $fetch_products['productName']; ?>">
+                            <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
+                            <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
+                            <a href="quick_view.php?pid=<?= $fetch_products['productID']; ?>" class="fas fa-eye"></a>
+                            <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
+                            <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
+                            <a href="category.php?category=<?= $fetch_products['category']; ?>"
+                                class="cat"><?= $fetch_products['category']; ?></a>
+                            <div class="name"><?= $fetch_products['productName']; ?></div>
+                            <div class="flex">
+                                <div class="price"><?= $fetch_products['price']; ?>k</div>
+                                <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
+                            </div>
+                        </form>
+                    <?php
                     }
                 } else {
                     echo '<p class="empty">Không có sản phẩm nào khớp với tìm kiếm của bạn!</p>';
@@ -88,22 +88,22 @@ include 'components/add_cart.php';
                 if ($select_products->rowCount() > 0) {
                     while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
                     ?>
-            <form action="" method="post" class="box">
-                <input type="hidden" name="pid" value="<?= $fetch_products['productID']; ?>">
-                <input type="hidden" name="name" value="<?= $fetch_products['productName']; ?>">
-                <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
-                <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
-                <a href="quick_view.php?pid=<?= $fetch_products['productID']; ?>" class="fas fa-eye"></a>
-                <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
-                <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-                <a href="category.php?category=<?= $fetch_products['category']; ?>"
-                    class="cat"><?= $fetch_products['category']; ?></a>
-                <div class="name"><?= $fetch_products['productName']; ?></div>
-                <div class="flex">
-                    <div class="price"><span>$</span><?= $fetch_products['price']; ?></div>
-                    <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
-                </div>
-            </form>
+                        <form action="" method="post" class="box">
+                            <input type="hidden" name="pid" value="<?= $fetch_products['productID']; ?>">
+                            <input type="hidden" name="name" value="<?= $fetch_products['productName']; ?>">
+                            <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
+                            <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
+                            <a href="quick_view.php?pid=<?= $fetch_products['productID']; ?>" class="fas fa-eye"></a>
+                            <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
+                            <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
+                            <a href="category.php?category=<?= $fetch_products['category']; ?>"
+                                class="cat"><?= $fetch_products['category']; ?></a>
+                            <div class="name"><?= $fetch_products['productName']; ?></div>
+                            <div class="flex">
+                                <div class="price"><?= $fetch_products['price']; ?>k</div>
+                                <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
+                            </div>
+                        </form>
             <?php
                     }
                 } else {

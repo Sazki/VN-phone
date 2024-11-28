@@ -27,7 +27,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Phân trang
-$orders_per_page = 5; // Số đơn hàng trên mỗi trang
+$orders_per_page = 6; // Số đơn hàng trên mỗi trang
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Trang hiện tại
 $start_from = ($page - 1) * $orders_per_page; // Vị trí bắt đầu truy vấn
 

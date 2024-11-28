@@ -7,58 +7,58 @@ session_start();
 $admin_id = $_SESSION['admin_id'];
 
 if (!isset($admin_id)) {
-   header('location:admin_login.php');
+    header('location:admin_login.php');
 };
 
 if (isset($_POST['add_product'])) {
 
-   $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
-   $price = htmlspecialchars($_POST['price'], ENT_QUOTES, 'UTF-8');
-   $category = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8');
+    $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
+    $price = htmlspecialchars($_POST['price'], ENT_QUOTES, 'UTF-8');
+    $category = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8');
 
-   // Xử lý file upload
-   $image = $_FILES['image']['name'];
-   $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_size = $_FILES['image']['size'];
-   $image_ext = pathinfo($image, PATHINFO_EXTENSION); // Lấy phần mở rộng của file
-   $image_folder = '../uploaded_img/';
+    // Xử lý file upload
+    $image = $_FILES['image']['name'];
+    $image_tmp_name = $_FILES['image']['tmp_name'];
+    $image_size = $_FILES['image']['size'];
+    $image_ext = pathinfo($image, PATHINFO_EXTENSION); // Lấy phần mở rộng của file
+    $image_folder = '../uploaded_img/';
 
-   // Tạo tên file mã hóa
-   $hashed_name = md5(uniqid(rand(), true)) . '.' . $image_ext;
+    // Tạo tên file mã hóa
+    $hashed_name = md5(uniqid(rand(), true)) . '.' . $image_ext;
 
-   $full_path = $image_folder . $hashed_name;
+    $full_path = $image_folder . $hashed_name;
 
-   $select_products = $conn->prepare("SELECT * FROM `products` WHERE productName = ?");
-   $select_products->execute([$name]);
+    $select_products = $conn->prepare("SELECT * FROM `products` WHERE productName = ?");
+    $select_products->execute([$name]);
 
-   if ($select_products->rowCount() > 0) {
-      $message[] = 'tên sản phẩm đã tồn tại!';
-   } else {
-      if ($image_size > 10000000) {
-         $message[] = 'kích thước hình ảnh quá lớn';
-      } else {
-         move_uploaded_file($image_tmp_name, $full_path);
+    if ($select_products->rowCount() > 0) {
+        $message[] = 'tên sản phẩm đã tồn tại!';
+    } else {
+        if ($image_size > 10000000) {
+            $message[] = 'kích thước hình ảnh quá lớn';
+        } else {
+            move_uploaded_file($image_tmp_name, $full_path);
 
-         $insert_product = $conn->prepare("INSERT INTO `products`(productName, category, price, image) VALUES(?,?,?,?)");
-         $insert_product->execute([$name, $category, $price, $hashed_name]);
+            $insert_product = $conn->prepare("INSERT INTO `products`(productName, category, price, image) VALUES(?,?,?,?)");
+            $insert_product->execute([$name, $category, $price, $hashed_name]);
 
-         $message[] = 'sản phẩm mới đã được thêm vào!';
-      }
-   }
+            $message[] = 'sản phẩm mới đã được thêm vào!';
+        }
+    }
 }
 
 if (isset($_GET['delete'])) {
 
-   $delete_id = $_GET['delete'];
-   $delete_product_image = $conn->prepare("SELECT * FROM `products` WHERE productID = ?");
-   $delete_product_image->execute([$delete_id]);
-   $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
-   unlink('../uploaded_img/' . $fetch_delete_image['image']);
-   $delete_product = $conn->prepare("DELETE FROM `products` WHERE productID = ?");
-   $delete_product->execute([$delete_id]);
-   $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE productID = ?");
-   $delete_cart->execute([$delete_id]);
-   header('location:products.php');
+    $delete_id = $_GET['delete'];
+    $delete_product_image = $conn->prepare("SELECT * FROM `products` WHERE productID = ?");
+    $delete_product_image->execute([$delete_id]);
+    $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
+    unlink('../uploaded_img/' . $fetch_delete_image['image']);
+    $delete_product = $conn->prepare("DELETE FROM `products` WHERE productID = ?");
+    $delete_product->execute([$delete_id]);
+    $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE productID = ?");
+    $delete_cart->execute([$delete_id]);
+    header('location:products.php');
 }
 
 ?>
@@ -74,6 +74,8 @@ if (isset($_GET['delete'])) {
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="../css/admin_style.css">
@@ -115,31 +117,31 @@ if (isset($_GET['delete'])) {
         <div class="box-container">
 
             <?php
-         $show_products = $conn->prepare("SELECT * FROM `products`");
-         $show_products->execute();
-         if ($show_products->rowCount() > 0) {
-            while ($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)) {
-         ?>
-            <div class="box">
-                <img src="../uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-                <div class="flex">
-                    <div class="price"><?= $fetch_products['price']; ?>k</div>
-                    <div class="category"><?= $fetch_products['category']; ?></div>
-                </div>
-                <div class="name"><?= $fetch_products['productName']; ?></div>
-                <div class="flex-btn">
-                    <a href="update_product.php?update=<?= $fetch_products['productID']; ?>" class="option-btn">Sửa</a>
-                    <a href="products.php?dsửate=<?= $fetch_products['productID']; ?>" class="delete-btn"
-                        onclick="return confirm('delete this product?');">Xóa</a>
-                </div>
-            </div>
+            $show_products = $conn->prepare("SELECT * FROM `products`");
+            $show_products->execute();
+            if ($show_products->rowCount() > 0) {
+                while ($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+                    <div class="box">
+                        <img src="../uploaded_img/<?= $fetch_products['image']; ?>" alt="">
+                        <div class="flex">
+                            <div class="price"><?= $fetch_products['price']; ?>k</div>
+                            <div class="category"><?= $fetch_products['category']; ?></div>
+                        </div>
+                        <div class="name"><?= $fetch_products['productName']; ?></div>
+                        <div class="flex-btn">
+                            <a href="update_product.php?update=<?= $fetch_products['productID']; ?>" class="option-btn">Sửa</a>
+                            <a href="products.php?delete=<?= $fetch_products['productID']; ?>" class="delete-btn"
+                                onclick="return confirm('delete this product?');">Xóa</i></a>
+                        </div>
+                    </div>
             <?php
+                }
+            } else {
+                echo '<p class="empty">chưa có sản phẩm nào được thêm vào!</p>';
             }
-         } else {
-            echo '<p class="empty">chưa có sản phẩm nào được thêm vào!</p>';
-         }
-         
-         ?>
+
+            ?>
 
         </div>
 
