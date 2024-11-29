@@ -165,6 +165,7 @@ section {
 .btn {
 	background-color: var(--yellow);
 	color: var(--black);
+	border-radius: 3px;
 }
 
 .delete-btn {
@@ -889,6 +890,45 @@ section {
 	text-decoration: underline;
 }
 
+/* Đường phân cách giữa đăng nhập truyền thống và Google */
+.separator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 2rem 0;
+	position: relative;
+}
+
+.separator::before,
+.separator::after {
+	content: '';
+	height: 1px;
+	background: var(--light-color);
+	flex: 1;
+	margin: 0 1rem;
+}
+
+.separator span {
+	font-size: 1.6rem;
+	color: var(--light-color);
+	text-transform: uppercase;
+	padding: 0 1rem;
+	background: var(--white);
+	position: relative;
+	z-index: 1;
+}
+
+/* Nút Google Sign-In */
+#google-login-container {
+	text-align: center;
+}
+
+.g_id_signin {
+	display: inline-block;
+	width: 100%; /* Chiều rộng ngang với form */
+	margin: 1.5rem 0;
+}
+
 .user-details .user {
 	max-width: 50rem;
 	margin: 0 auto;
@@ -1059,9 +1099,54 @@ footer .content .top .media-icons a {
 	transition: all 0.3s ease;
 }
 
-footer .content .top .media-icons a:hover {
+/* footer .content .top .media-icons a:hover {
 	background: white;
 	color: #004042;
+} */
+
+footer .content .top .media-icons a:nth-child(1) {
+	background: #4267b2;
+}
+
+footer .content .top .media-icons a:nth-child(1):hover {
+	color: #4267b2;
+	background: #fff;
+}
+
+footer .content .top .media-icons a:nth-child(2) {
+	background: #1da1f2;
+}
+
+footer .content .top .media-icons a:nth-child(2):hover {
+	color: #1da1f2;
+	background: #fff;
+}
+
+footer .content .top .media-icons a:nth-child(3) {
+	background: #e1306c;
+}
+
+footer .content .top .media-icons a:nth-child(3):hover {
+	color: #e1306c;
+	background: #fff;
+}
+
+footer .content .top .media-icons a:nth-child(4) {
+	background: #0077b5;
+}
+
+footer .content .top .media-icons a:nth-child(4):hover {
+	color: #0077b5;
+	background: #fff;
+}
+
+footer .content .top .media-icons a:nth-child(5) {
+	background: #ff0000;
+}
+
+footer .content .top .media-icons a:nth-child(5):hover {
+	color: #ff0000;
+	background: #fff;
 }
 
 footer .content .link-boxes {
@@ -1219,6 +1304,20 @@ footer .bottom-details .bottom-text a:hover {
 
 	.products .box-container {
 		grid-template-columns: 1fr;
+	}
+
+	.category .box-container-cate {
+		display: flex; /* Bật Flexbox */
+		flex-wrap: nowrap; /* Không cho các phần tử xuống dòng */
+		flex-direction: column; /* Sắp xếp theo chiều dọc */
+		align-items: center; /* Căn giữa theo chiều ngang */
+		justify-content: center; /* Căn giữa theo chiều dọc */
+	}
+
+	.category .box-container-cate .box-show {
+		width: 90%; /* Chiều rộng tối đa của box */
+		margin: 1rem auto; /* Thêm khoảng cách xung quanh */
+		text-align: center; /* Căn chỉnh nội dung bên trong */
 	}
 
 	.heading h3 {
