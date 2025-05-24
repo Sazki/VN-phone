@@ -18,7 +18,7 @@ if(isset($_SESSION['user_id'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>About VNFood</title>
+   <title>About VN-Phone</title>
 
    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 
@@ -42,13 +42,16 @@ if(isset($_SESSION['user_id'])){
    <div class="row" style="margin-top:100px">
 
       <div class="image">
-         <img src="images/about-img.svg" alt="About VNFood">
+         <img src="images/about-phone.svg" alt="About VN-Phone">
+         <!-- Bạn nên thay bằng hình minh họa điện thoại: about-phone.svg/png -->
       </div>
 
       <div class="content">
-         <h3>Tại sao nên chọn VNFood?</h3>
-         <p>VNFood tự hào là thương hiệu đồ ăn nhanh hàng đầu, mang đến hương vị Việt Nam đậm đà kết hợp với phong cách hiện đại. Với nguyên liệu tươi ngon, dịch vụ nhanh chóng và menu đa dạng, chúng tôi cam kết mang lại trải nghiệm tuyệt vời nhất cho khách hàng.</p>
-         <a href="menu.html" class="btn">Đặt hàng ngay</a>
+         <h3>Tại sao nên chọn VN-Phone?</h3>
+         <p>
+         VN-Phone tự hào là nhà phân phối điện thoại chính hãng uy tín hàng đầu tại Việt Nam. Chúng tôi cung cấp các dòng điện thoại mới nhất từ Apple, Samsung, Xiaomi, Oppo,... với giá cả cạnh tranh, bảo hành chính hãng và dịch vụ hậu mãi tận tâm. Đội ngũ nhân viên chuyên nghiệp sẽ tư vấn cho bạn chọn lựa sản phẩm phù hợp nhất với nhu cầu và ngân sách.
+         </p>
+         <a href="menu.php" class="btn">Xem sản phẩm</a>
       </div>
 
    </div>
@@ -61,26 +64,26 @@ if(isset($_SESSION['user_id'])){
 
 <section class="steps">
 
-   <h1 class="title">Phương Châm</h1>
+   <h1 class="title">Quy trình mua hàng</h1>
 
    <div class="box-container">
 
       <div class="box">
-         <img src="images/step-1.png" alt="Choose Your Order">
-         <h3>Đặt hàng dễ dàng</h3>
-         <p>Dễ dàng chọn món yêu thích từ menu phong phú của chúng tôi, bao gồm burger, pizza, gà rán, và nhiều món khác.</p>
+         <img src="images/step-1.png" alt="Chọn sản phẩm">
+         <h3>Chọn sản phẩm yêu thích</h3>
+         <p>Khách hàng dễ dàng lựa chọn các mẫu điện thoại đa dạng, cập nhật liên tục các dòng mới nhất trên thị trường.</p>
       </div>
 
       <div class="box">
-         <img src="images/step-2.png" alt="Fast Delivery">
-         <h3>Giao hàng nhanh</h3>
-         <p>Chúng tôi giao hàng nhanh chóng đến tận cửa để bạn có thể thưởng thức món ăn nóng hổi, tươi ngon.</p>
+         <img src="images/step-2.png" alt="Đặt hàng và thanh toán">
+         <h3>Đặt hàng & Thanh toán tiện lợi</h3>
+         <p>Đặt hàng trực tuyến nhanh chóng, hỗ trợ nhiều hình thức thanh toán an toàn.</p>
       </div>
 
       <div class="box">
-         <img src="images/step-3.png" alt="Enjoy Your Food">
-         <h3>Chất lượng tốt nhất</h3>
-         <p>Thưởng thức hương vị tuyệt vời và chia sẻ những khoảnh khắc đáng nhớ cùng gia đình và bạn bè.</p>
+         <img src="images/step-4.png" alt="Nhận hàng & hỗ trợ">
+         <h3>Giao hàng tận nơi - Hỗ trợ nhiệt tình</h3>
+         <p>Giao hàng toàn quốc, hỗ trợ bảo hành chính hãng và chăm sóc khách hàng tận tâm.</p>
       </div>
 
    </div>
@@ -93,7 +96,7 @@ if(isset($_SESSION['user_id'])){
 
 <section class="reviews">
 
-   <h1 class="title">Đánh giá của khách hàng</h1>
+   <h1 class="title">Phản hồi khách hàng</h1>
 
    <div class="swiper reviews-slider">
 
@@ -101,7 +104,7 @@ if(isset($_SESSION['user_id'])){
 
          <div class="swiper-slide slide">
             <img src="images/pic-1.png" alt="Customer 1">
-            <p>VNFood thực sự tuyệt vời! Đồ ăn ngon, giao hàng nhanh, và nhân viên rất nhiệt tình.</p>
+            <p>Mình đã mua iPhone 15 Pro Max tại VN-Phone, máy chính hãng, giá tốt hơn so với thị trường. Sẽ tiếp tục ủng hộ shop!</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -114,7 +117,7 @@ if(isset($_SESSION['user_id'])){
 
          <div class="swiper-slide slide">
             <img src="images/pic-2.png" alt="Customer 2">
-            <p>Đây là địa chỉ ăn nhanh yêu thích của tôi! Hương vị chuẩn Việt Nam, đáng để thử.</p>
+            <p>Shop tư vấn rất tận tâm, mình mua Samsung S24 Ultra còn được tặng thêm quà, cảm ơn VN-Phone!</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -127,7 +130,7 @@ if(isset($_SESSION['user_id'])){
 
          <div class="swiper-slide slide">
             <img src="images/pic-3.png" alt="Customer 3">
-            <p>Tôi rất thích gà của VNFood. Không chỉ ngon mà còn chất lượng hơn cả mong đợi!</p>
+            <p>Giao hàng nhanh, máy còn nguyên seal, có đầy đủ bảo hành điện tử. Sẽ giới thiệu cho bạn bè.</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>

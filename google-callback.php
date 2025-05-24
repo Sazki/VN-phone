@@ -8,7 +8,7 @@ if (isset($_POST['credential'])) {
     $id_token = $_POST['credential'];
 
     // Tạo một client Google
-    $client = new Google_Client(['client_id' => '884739451917-memhs7bsdnclddn77vi4mp7npbcu7b5l.apps.googleusercontent.com']);  // Thay bằng Client ID của bạn
+    $client = new Google_Client(['client_id' => '792266070129-cucpol6ejm3c9se9lbs10fer54k429ce.apps.googleusercontent.com']);  // Thay bằng Client ID của bạn
     $payload = $client->verifyIdToken($id_token);
 
     if ($payload) {
@@ -26,13 +26,14 @@ if (isset($_POST['credential'])) {
             header('location:home.php');
         } else {
             // Người dùng chưa tồn tại, thêm vào database
-            $insert_user = $conn->prepare("INSERT INTO `users` (email, name, role) VALUES (?, ?, ?)");
-            $insert_user->execute([$email, $name, 'client']);
+            $insert_user = $conn->prepare("INSERT INTO `users` (email, name, phoneNumber, password, address, role) VALUES (?, ?, ?, ?, ?, ?)");
+            $insert_user->execute([$email, $name,'', '', '', 'client']);
             $_SESSION['user_id'] = $conn->lastInsertId();
             header('location:home.php');
         }
     } else {
-        echo "Không thể xác thực Google.";
+        error_log("Lỗi xác thực: " . json_encode($client->getLastError()));
+    echo "Không thể xác thực Google.";
     }
 } else {
     echo "Không tìm thấy thông tin đăng nhập.";

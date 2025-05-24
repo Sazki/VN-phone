@@ -47,64 +47,64 @@ include 'components/add_cart.php';
                 <div class="swiper-slide slide">
                     <div class="content">
                         <!-- <span>đặt hàng trực tuyến</span> -->
-                        <h3>Trà Sữa</h3>
-                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                        <h3>Samsung Galaxy S25 Ultra</h3>
+                        <a href="menu.php" class="btn">Xem ngay</a>
                     </div>
                     <div class="image">
-                        <img src="images/test1.png" alt="">
+                        <img src="images/s25-ultra.png" alt="">
                     </div>
                 </div>
                 <div class="swiper-slide slide">
                     <div class="content">
                         <!-- <span>đặt hàng trực tuyến</span> -->
-                        <h3>Gà rán</h3>
-                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                        <h3>Iphone 15 Pro Max</h3>
+                        <a href="menu.php" class="btn">Xem ngay</a>
                     </div>
                     <div class="image">
-                        <img src="images/test2.png" alt="">
+                        <img src="images/iphone15-home.jpg" alt="">
                     </div>
                 </div>
                 <div class="swiper-slide slide">
                     <div class="content">
                         <!-- <span>đặt hàng trực tuyến</span> -->
-                        <h3>Mỳ gà</h3>
-                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                        <h3>Samsung S24 Ultra</h3>
+                        <a href="menu.php" class="btn">Xem ngay</a>
                     </div>
                     <div class="image">
-                        <img src="images/test3.png" alt="">
-                    </div>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="content">
-                        <!-- <span>đặt hàng trực tuyến</span> -->
-                        <h3>Pizza</h3>
-                        <a href="menu.php" class="btn">Đặt Hàng</a>
-                    </div>
-                    <div class="image">
-                        <img src="images/home-img-1.png" alt="">
+                        <img src="images/s24.jpg" alt="">
                     </div>
                 </div>
 
                 <div class="swiper-slide slide">
                     <div class="content">
                         <!-- <span>đặt hàng trực tuyến</span> -->
-                        <h3>Bánh hamburger phô mai</h3>
-                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                        <h3>Xiaomi 14 Pro</h3>
+                        <a href="menu.php" class="btn">Xem ngay</a>
                     </div>
                     <div class="image">
-                        <img src="images/home-img-2.png" alt="">
+                        <img src="images/xiaomi14.jpg" alt="">
                     </div>
                 </div>
 
                 <div class="swiper-slide slide">
                     <div class="content">
                         <!-- <span>đặt hàng trực tuyến</span> -->
-                        <h3>Gà nướng</h3>
-                        <a href="menu.php" class="btn">Đặt Hàng</a>
+                        <h3>Oppo Reno 12</h3>
+                        <a href="menu.php" class="btn">Xem ngay</a>
                     </div>
                     <div class="image">
-                        <img src="images/home-img-3.png" alt="">
+                        <img src="images/reno12.jpg" alt="">
+                    </div>
+                </div>
+
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <!-- <span>đặt hàng trực tuyến</span> -->
+                        <h3>Oppo Find N5</h3>
+                        <a href="menu.php" class="btn">Xem ngay</a>
+                    </div>
+                    <div class="image">
+                        <img src="images/oppo-find-n5.png" alt="">
                     </div>
                 </div>
 
@@ -226,29 +226,29 @@ include 'components/add_cart.php';
         <section class="category">
             <h1 class="title">Danh mục</h1>
             <div class="box-container-cate">
-                <a href="category.php?category=thức ăn nhanh" class="box-show">
-                    <img src="images/doannhanh.jpg" alt="Thức ăn nhanh">
-                    <div class="info">Thức ăn nhanh</div>
-                    <div class="overlay">Đặt Mua</div>
+                <a href="category.php?category=Iphone" class="box-show">
+                    <img src="images/apple.jpg" alt="Apple">
+                    <div class="info">Iphone</div>
+                    <div class="overlay">Xem ngay</div>
                 </a>
 
-                <a href="category.php?category=món ăn chính" class="box-show">
-                    <img src="images/monan.jpg" alt="Món ăn chính">
-                    <div class="info">Món ăn chính</div>
-                    <div class="overlay">Đặt Mua</div>
+                <a href="category.php?category=Samsung" class="box-show">
+                    <img src="images/samsung.jpg" alt="Samsung">
+                    <div class="info">Samsung</div>
+                    <div class="overlay">Xem ngay</div>
                 </a>
 
-                <a href="category.php?category=đồ uống" class="box-show">
-                    <img src="images/douong.jpg" alt="Đồ uống">
-                    <div class="info">Đồ uống</div>
-                    <div class="overlay">Đặt Mua</div>
+                <a href="category.php?category=Xiaomi" class="box-show">
+                    <img src="images/xiaomi.jpg" alt="Xiaomi">
+                    <div class="info">Xiaomi</div>
+                    <div class="overlay">Xem ngay</div>
                 </a>
 
-                <a href="category.php?category=món tráng miệng" class="box-show">
-                    <img src="images/trangmieng.jpg" alt="Món tráng miệng">
-                    <div class="info">Món tráng miệng</div>
-                    <div class="overlay">Đặt Mua</div>
-                </a>
+                <a href="category.php?category=Oppo" class="box-show">
+                    <img src="images/oppo.jpg" alt="Oppo">
+                    <div class="info">Oppo</div>
+                    <div class="overlay">Xem ngay</div>
+                                </a>
             </div>
         </section>
     </body>
@@ -262,49 +262,68 @@ include 'components/add_cart.php';
 
     <section class="products">
 
-        <h1 class="title">món ăn mới nhất</h1>
+    <h1 class="title">Sản phẩm mới nhất</h1>
 
-        <div class="box-container">
+    <div class="box-container">
 
-            <?php
-            $select_products = $conn->prepare("SELECT * FROM `products` ORDER BY productID DESC LIMIT 6");
-            $select_products->execute();
-            if ($select_products->rowCount() > 0) {
-                while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-                    <form action="" method="post" class="box">
-                        <input type="hidden" name="pid" value="<?= $fetch_products['productID']; ?>">
-                        <input type="hidden" name="name" value="<?= $fetch_products['productName']; ?>">
-                        <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
-                        <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
-                        <a href="quick_view.php?pid=<?= $fetch_products['productID']; ?>" class="fas fa-eye"></a>
-                        <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
-                        <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-                        <a href="category.php?category=<?= $fetch_products['category']; ?>"
-                            class="cat"><?= $fetch_products['category']; ?></a>
-                        <div class="name"><?= $fetch_products['productName']; ?></div>
-                        <div class="flex">
-                            <div class="price"><?= $fetch_products['price']; ?>k</div>
-                            <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
-                        </div>
-                    </form>
-            <?php
+        <?php
+        $select_products = $conn->prepare("SELECT * FROM `products` ORDER BY productID DESC LIMIT 6");
+        $select_products->execute();
+        if ($select_products->rowCount() > 0) {
+            while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
+                // Lấy ảnh màu đầu nếu có nhiều ảnh
+                $images = [];
+                if (!empty($fetch_products['images'])) {
+                    $images = array_map('trim', explode(',', $fetch_products['images']));
                 }
-            } else {
-                echo '<p class="empty">chưa có sản phẩm nào được thêm vào!</p>';
+                $product_img = !empty($images) ? $images[0] : $fetch_products['image'];
+
+                // Hiển thị các thông số cơ bản ngắn gọn
+                $specs = [];
+                if (!empty($fetch_products['brand'])) $specs[] = $fetch_products['brand'];
+                if (!empty($fetch_products['model'])) $specs[] = $fetch_products['model'];
+                if (!empty($fetch_products['ram'])) $specs[] = "RAM {$fetch_products['ram']}GB";
+                if (!empty($fetch_products['storage'])) $specs[] = "ROM {$fetch_products['storage']}GB";
+                if (!empty($fetch_products['color'])) $specs[] = "Màu: ".explode(",", $fetch_products['color'])[0];
+                $short_specs = implode(' | ', $specs);
+        ?>
+                <form action="" method="post" class="box">
+                    <input type="hidden" name="pid" value="<?= $fetch_products['productID']; ?>">
+                    <input type="hidden" name="name" value="<?= $fetch_products['productName']; ?>">
+                    <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
+                    <input type="hidden" name="image" value="<?= $product_img; ?>">
+                    <a href="quick_view.php?pid=<?= $fetch_products['productID']; ?>" class="fas fa-eye" title="Xem chi tiết"></a>
+                    <button type="submit" class="fas fa-shopping-cart" name="add_to_cart" title="Thêm vào giỏ"></button>
+                    <img src="uploaded_img/<?= $product_img; ?>" alt="">
+                    <a href="category.php?category=<?= $fetch_products['category']; ?>" class="cat"><?= $fetch_products['category']; ?></a>
+                    <div class="name"><?= $fetch_products['productName']; ?></div>
+                    <div class="specs" style="font-size:0.97rem;color:#666; margin-bottom:3px;"><?= $short_specs; ?></div>
+                    <div class="flex">
+                        <div class="price"><?= number_format((float)$fetch_products['price']); ?>₫</div>
+                        <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
+                    </div>
+                </form>
+        <?php
             }
-            ?>
+        } else {
+            echo '<p class="empty">Chưa có sản phẩm nào được thêm vào!</p>';
+        }
+        ?>
 
-        </div>
+    </div>
 
-        <div class="more-btn">
-            <a href="menu.php" class="btn">xem tất cả</a>
-        </div>
+    <div class="more-btn">
+        <a href="menu.php" class="btn">Xem tất cả</a>
+    </div>
 
-    </section>
+</section>
+
+
+
+
 
     <div id="vnfood-loader-container">
-        <div class="vnfood-loader">VNFood</div>
+        <div class="vnfood-loader">VN-Phone</div>
     </div>
 
 
@@ -331,9 +350,10 @@ include 'components/add_cart.php';
             const loaderContainer = document.getElementById('vnfood-loader-container');
             setTimeout(() => {
                 loaderContainer.style.display = 'none'; // Ẩn loader sau 2.5 giây
-            }, 2500); // Thời gian khớp với animation (2.5s)
+            }, 2000); // Thời gian khớp với animation (2.5s)
         });
     </script>
+    
 
 </body>
 

@@ -97,7 +97,8 @@ if (isset($_POST['confirm_received'])) {
                 <p>Địa chỉ : <span><?= $fetch_orders['address']; ?></span></p>
                 <p>phương thức thanh toán : <span><?= $fetch_orders['method']; ?></span></p>
                 <p>Chi tiết đơn hàng: <span><?= $fetch_orders['total_products']; ?></span></p>
-                <p>Tổng giá đơn : <span><?= $fetch_orders['total_price']; ?>k</span></p>
+                <p>Tổng giá đơn : <span><?= number_format((float)$fetch_orders['total_price']); ?>₫</span></p>
+               
                 <p>Tình trạng đơn hàng :
                     <span style="color:<?php
                                              if ($fetch_orders['payment_status'] == 'chờ giao hàng') {

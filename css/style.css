@@ -87,7 +87,7 @@ section {
 .vnfood-loader {
 	font-size: 0px; /* Bắt đầu nhỏ */
 	font-weight: bold;
-	color: #ff5722;
+	color: #000000;
 	animation: vnfood-grow 2.5s ease-in-out forwards;
 	opacity: 0; /* Ban đầu mờ */
 }
@@ -1333,4 +1333,30 @@ footer .bottom-details .bottom-text a:hover {
 		flex-flow: column;
 		gap: 0;
 	}
+}
+.products .box .specs {
+    font-size: 0.97rem;
+    color: #666;
+    margin-bottom: 4px;
+    text-align: center;
+}
+.products .box img {
+    width: 116px;
+    height: 116px;
+    object-fit: contain;
+    border-radius: 7px;
+    margin-bottom: 8px;
+    background: #f8f8f8;
+}
+.products .box .name {
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: #232526;
+    text-align: center;
+    margin-bottom: 3px;
+}
+.products .box .price {
+    color: #ff9800;
+    font-size: 1.09rem;
+    font-weight: 700;
 }

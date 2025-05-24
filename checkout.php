@@ -5,15 +5,17 @@ include 'components/connect.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-
     $user_id = $_SESSION['user_id'];
 } else {
-
     $user_id = '';
-
     header('location:home.php');
-};
+    exit();
+}
 
+// Lấy thông tin user cho phần dưới
+$select_profile = $conn->prepare("SELECT * FROM `users` WHERE userID = ?");
+$select_profile->execute([$user_id]);
+$fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 
 if (isset($_POST['submit'])) {
 
@@ -24,40 +26,42 @@ if (isset($_POST['submit'])) {
     $address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
     $total_products = htmlspecialchars($_POST['total_products'], ENT_QUOTES, 'UTF-8');
     $discount_code = htmlspecialchars($_POST['discount_code'], ENT_QUOTES, 'UTF-8');
-    $total_price = htmlspecialchars($_POST['total_price'], ENT_QUOTES, 'UTF-8');
+
+    // Ép kiểu số nguyên cho tổng giá
+    $total_price = isset($_POST['total_price']) ? preg_replace('/\D/', '', $_POST['total_price']) : 0;
+    $total_price_coupon = isset($_POST['total_price_coupon']) ? preg_replace('/\D/', '', $_POST['total_price_coupon']) : 0;
 
     $check_cart = $conn->prepare("SELECT * FROM `cart` WHERE userID = ?");
-
     $check_cart->execute([$user_id]);
 
     if ($check_cart->rowCount() > 0) {
 
         if ($address == '') {
-
             $message[] = 'Vui lòng thêm địa chỉ của bạn!';
         } else {
-
-            if (!empty($discount_code)) {
-                $total_price =  htmlspecialchars($_POST['total_price_coupon'], ENT_QUOTES, 'UTF-8');
+            // Nếu có mã giảm giá và đã nhập giá sau giảm giá
+            if (!empty($discount_code) && $total_price_coupon > 0) {
+                $total_price = $total_price_coupon;
             }
 
             $insert_order = $conn->prepare("INSERT INTO `orders`(userID, name, phoneNumber, email, method, address, total_products, total_price, payment_status, placed_on) VALUES(?,?,?,?,?,?,?,?,?,NOW())");
 
-            $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price, 'chờ giao hàng']);
+            $insert_order->execute([
+                $user_id, $name, $number, $email, $method, $address, $total_products, $total_price, 'chờ giao hàng'
+            ]);
 
             $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE userID = ?");
-
             $delete_cart->execute([$user_id]);
 
             $message[] = 'Đơn hàng đã được đặt thành công!';
         }
     } else {
-
         $message[] = 'Giỏ hàng của bạn đang trống';
     }
 }
 
 ?>
+
 
 <!DOCTYPE html>
 
@@ -163,6 +167,22 @@ if (isset($_POST['submit'])) {
     }
     </style>
 </head>
+<?php
+$message = $message ?? [];
+if (isset($_GET['address_updated']) && $_GET['address_updated'] == 1) {
+    $message[] = "Địa chỉ đã được cập nhật thành công!";
+}
+?>
+<?php if (!empty($message)) foreach ($message as $msg): ?>
+    <div class="message" style="margin:12px 0;background:#f0fff0;border-left:5px solid #3adb76;padding:10px 18px;border-radius:8px;color:#237e28;">
+        <?= htmlspecialchars($msg) ?>
+    </div>
+<?php endforeach; ?>
+<?php
+if (isset($_GET['profile_updated'])) {
+    echo '<div class="message" style="margin:12px 0;background:#f0fff0;border-left:5px solid #3adb76;padding:10px 18px;border-radius:8px;color:#237e28;">Hồ sơ đã được cập nhật thành công!</div>';
+}
+?>
 
 <body>
     <!-- header section starts  -->
@@ -187,16 +207,16 @@ if (isset($_POST['submit'])) {
                         $total_products = implode($cart_items);
                         $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
                 ?>
-                <p><span class="name"><?= $fetch_cart['cartName']; ?></span><span
-                        class="price"><?= $fetch_cart['price']; ?>k x <?= $fetch_cart['quantity']; ?></span></p>
+                <p><span class="name"><?= $fetch_cart['cartName']; ?></span>
+    <span class="price"><?= number_format($fetch_cart['price']); ?>₫ x <?= $fetch_cart['quantity']; ?></span></p>
                 <?php
                     }
                 } else {
                     echo '<p class="empty">Giỏ hàng của bạn đang trống!</p>';
                 }
                 ?>
-                <p class="grand-total"><span class="name">Tổng giá đơn:</span><span
-                        class="price"><?= $grand_total; ?>k</span></p>
+                <p class="grand-total"><span class="name">Tổng giá đơn:</span>
+                <span class="price"><?= number_format($grand_total); ?>₫</span></p>
                 <a href="cart.php" class="btn">Xem giỏ hàng</a>
             </div>
 
@@ -208,7 +228,7 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="total-price" id="discounted-total">
-                Tổng giá sau giảm giá: <span id="total_after_discount"><?= $total_after_discount ?>k</span>
+                Tổng giá sau giảm giá: <span id="total_after_discount"><?= number_format($total_after_discount); ?>₫</span>
             </div>
 
             <div class="user-info">
@@ -285,7 +305,7 @@ if (isset($_POST['submit'])) {
                         discountMessage.style.color = 'green';
 
                         // Cập nhật tổng giá sau giảm giá và hiển thị nó
-                        totalAfterDiscount.textContent = response.total_after_discount + "k";
+                        totalAfterDiscount.textContent = response.total_after_discount + "₫";
                         discountedTotal.classList.add('show'); // Hiện phần giá sau giảm giá
 
                         // Cập nhật giá trị vào input ẩn

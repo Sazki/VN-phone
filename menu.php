@@ -46,7 +46,7 @@ include 'components/add_cart.php';
 
     <section class="products">
 
-        <h1 class="title" style="margin-top:100px">Danh sách thực phẩm</h1>
+        <h1 class="title" style="margin-top:100px">Danh sách sản phẩm</h1>
 
         <div class="box-container">
 
@@ -68,7 +68,7 @@ include 'components/add_cart.php';
                     class="cat"><?= $fetch_products['category']; ?></a>
                 <div class="name"><?= $fetch_products['productName']; ?></div>
                 <div class="flex">
-                    <div class="price"><?= $fetch_products['price']; ?>k</div>
+                    <div class="price"><?= number_format((float)$fetch_products['price']); ?>₫</div>
                     <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2"">
          </div>
       </form>

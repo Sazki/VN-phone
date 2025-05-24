@@ -87,9 +87,9 @@ if (isset($_POST['submit'])) {
             <!-- Google Sign-In -->
             <div id="google-login-container">
                 <div id="g_id_onload"
-                    data-client_id="884739451917-memhs7bsdnclddn77vi4mp7npbcu7b5l.apps.googleusercontent.com"
+                    data-client_id="792266070129-cucpol6ejm3c9se9lbs10fer54k429ce.apps.googleusercontent.com"
                     data-context="signin" data-ux_mode="popup"
-                    data-login_uri="http://localhost:9001/VN_food_2/google-callback.php" data-auto_prompt="false">
+                    data-login_uri="http://localhost/VN_food/google-callback.php" data-auto_prompt="false">
                 </div>
                 <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
                     data-size="large"></div>

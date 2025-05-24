@@ -287,7 +287,8 @@ $total_pages = ceil($total_orders / $orders_per_page); // Tính tổng số tran
                 <td><?= $fetch_orders['phoneNumber']; ?></td>
                 <td><?= $fetch_orders['address']; ?></td>
                 <td><?= $fetch_orders['total_products']; ?></td>
-                <td><?= $fetch_orders['total_price']; ?>k</td>
+                <td><?= number_format($fetch_orders['total_price']); ?>₫</td>
+
                 <td><?= $fetch_orders['method']; ?></td>
                 <td>
                     <span
