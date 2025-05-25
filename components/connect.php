@@ -1,7 +1,7 @@
 <?php
 
-$db_name = 'mysql:host=localhost;dbname=online_phone';
+$db_name = 'mysql:host=localhost;dbname=VN_Phone';
 $user_name = 'root';
-$user_password = 'nam19012005';
+$user_password = '';
 
 $conn = new PDO($db_name, $user_name, $user_password);

@@ -44,16 +44,38 @@ if (isset($_POST['submit'])) {
                 $total_price = $total_price_coupon;
             }
 
-            $insert_order = $conn->prepare("INSERT INTO `orders`(userID, name, phoneNumber, email, method, address, total_products, total_price, payment_status, placed_on) VALUES(?,?,?,?,?,?,?,?,?,NOW())");
+            // Xử lý theo phương thức thanh toán
+            if ($method === 'thẻ tín dụng') {
+                // Chuyển hướng đến trang xử lý VNPay
+                ?>
+<form id="vnpay-form" action="vnpay_payment.php" method="post" style="display: none;">
+    <input type="hidden" name="name" value="<?= $name ?>">
+    <input type="hidden" name="number" value="<?= $number ?>">
+    <input type="hidden" name="email" value="<?= $email ?>">
+    <input type="hidden" name="address" value="<?= $address ?>">
+    <input type="hidden" name="total_products" value="<?= $total_products ?>">
+    <input type="hidden" name="total_price" value="<?= $total_price ?>">
+    <input type="hidden" name="total_price_coupon" value="<?= $total_price_coupon ?>">
+    <input type="hidden" name="discount_code" value="<?= $discount_code ?>">
+</form>
+<script>
+document.getElementById('vnpay-form').submit();
+</script>
+<?php
+                exit();
+            } else {
+                // Thanh toán khi nhận hàng - xử lý như cũ
+                $insert_order = $conn->prepare("INSERT INTO `orders`(userID, name, phoneNumber, email, method, address, total_products, total_price, payment_status, placed_on) VALUES(?,?,?,?,?,?,?,?,?,NOW())");
 
-            $insert_order->execute([
-                $user_id, $name, $number, $email, $method, $address, $total_products, $total_price, 'chờ giao hàng'
-            ]);
+                $insert_order->execute([
+                    $user_id, $name, $number, $email, $method, $address, $total_products, $total_price, 'chờ giao hàng'
+                ]);
 
-            $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE userID = ?");
-            $delete_cart->execute([$user_id]);
+                $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE userID = ?");
+                $delete_cart->execute([$user_id]);
 
-            $message[] = 'Đơn hàng đã được đặt thành công!';
+                $message[] = 'Đơn hàng đã được đặt thành công!';
+            }
         }
     } else {
         $message[] = 'Giỏ hàng của bạn đang trống';
@@ -77,9 +99,6 @@ if (isset($_POST['submit'])) {
 
     <title>Thanh toán</title>
 
-    xml
-
-    Copy
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
@@ -165,6 +184,59 @@ if (isset($_POST['submit'])) {
         display: block;
         /* Hiện khung khi áp dụng mã giảm giá */
     }
+
+    .payment-method {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+
+    .payment-method h3 {
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .payment-method select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        background: white;
+    }
+
+    .payment-method select:focus {
+        border-color: #5c6bc0;
+        outline: none;
+        box-shadow: 0 0 5px rgba(92, 107, 192, 0.3);
+    }
+
+    .vnpay-info {
+        margin-top: 10px;
+        padding: 12px;
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+        border-radius: 4px;
+        display: none;
+    }
+
+    .vnpay-info.show {
+        display: block;
+    }
+
+    .vnpay-info p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #1976d2;
+    }
+
+    .vnpay-info i {
+        margin-right: 8px;
+        color: #2196f3;
+    }
     </style>
 </head>
 <?php
@@ -174,9 +246,10 @@ if (isset($_GET['address_updated']) && $_GET['address_updated'] == 1) {
 }
 ?>
 <?php if (!empty($message)) foreach ($message as $msg): ?>
-    <div class="message" style="margin:12px 0;background:#f0fff0;border-left:5px solid #3adb76;padding:10px 18px;border-radius:8px;color:#237e28;">
-        <?= htmlspecialchars($msg) ?>
-    </div>
+<div class="message"
+    style="margin:12px 0;background:#f0fff0;border-left:5px solid #3adb76;padding:10px 18px;border-radius:8px;color:#237e28;">
+    <?= htmlspecialchars($msg) ?>
+</div>
 <?php endforeach; ?>
 <?php
 if (isset($_GET['profile_updated'])) {
@@ -208,7 +281,9 @@ if (isset($_GET['profile_updated'])) {
                         $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
                 ?>
                 <p><span class="name"><?= $fetch_cart['cartName']; ?></span>
-    <span class="price"><?= number_format($fetch_cart['price']); ?>₫ x <?= $fetch_cart['quantity']; ?></span></p>
+                    <span class="price"><?= number_format($fetch_cart['price']); ?>₫ x
+                        <?= $fetch_cart['quantity']; ?></span>
+                </p>
                 <?php
                     }
                 } else {
@@ -216,7 +291,8 @@ if (isset($_GET['profile_updated'])) {
                 }
                 ?>
                 <p class="grand-total"><span class="name">Tổng giá đơn:</span>
-                <span class="price"><?= number_format($grand_total); ?>₫</span></p>
+                    <span class="price"><?= number_format($grand_total); ?>₫</span>
+                </p>
                 <a href="cart.php" class="btn">Xem giỏ hàng</a>
             </div>
 
@@ -228,7 +304,8 @@ if (isset($_GET['profile_updated'])) {
             </div>
 
             <div class="total-price" id="discounted-total">
-                Tổng giá sau giảm giá: <span id="total_after_discount"><?= number_format($total_after_discount); ?>₫</span>
+                Tổng giá sau giảm giá: <span
+                    id="total_after_discount"><?= number_format($total_after_discount ?? 0); ?>₫</span>
             </div>
 
             <div class="user-info">
@@ -254,12 +331,23 @@ if (isset($_GET['profile_updated'])) {
                 <input type="hidden" name="address" value="<?= $fetch_profile['address'] ?>">
                 <input type="hidden" name="total_price_coupon" id="total_price_coupon" value="<?= $grand_total; ?>">
 
+                <div class="payment-method">
+                    <h3>Phương thức thanh toán</h3>
+                    <select name="method" class="box" required id="payment-method-select">
+                        <option value="" disabled selected>Chọn phương thức thanh toán</option>
+                        <option value="thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                        <option value="thẻ tín dụng">Thanh toán trực tuyến (VNPay)</option>
+                    </select>
 
-                <select name="method" class="box" required>
-                    <option value="" disabled selected>Chọn phương thức thanh toán</option>
-                    <option value="thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
-                    <option value="thẻ tín dụng">Thẻ tín dụng</option>
-                </select>
+                    <div class="vnpay-info" id="vnpay-info">
+                        <p><i class="fas fa-info-circle"></i> Thanh toán qua VNPay hỗ trợ:</p>
+                        <p><i class="fas fa-credit-card"></i> Thẻ ATM/Tài khoản ngân hàng</p>
+                        <p><i class="fas fa-mobile-alt"></i> Ví điện tử (MoMo, ZaloPay, etc.)</p>
+                        <p><i class="fas fa-qrcode"></i> Quét mã QR</p>
+                        <p><i class="fas fa-shield-alt"></i> Bảo mật cao với công nghệ SSL</p>
+                    </div>
+                </div>
+
                 <input type="submit" value="Đặt hàng" class="btn <?php if ($fetch_profile['address'] == '') {
                                                                         echo 'disabled';
                                                                     } ?>"
@@ -278,6 +366,19 @@ if (isset($_GET['profile_updated'])) {
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Xử lý hiển thị thông tin VNPay
+        const paymentSelect = document.getElementById('payment-method-select');
+        const vnpayInfo = document.getElementById('vnpay-info');
+
+        paymentSelect.addEventListener('change', function() {
+            if (this.value === 'thẻ tín dụng') {
+                vnpayInfo.classList.add('show');
+            } else {
+                vnpayInfo.classList.remove('show');
+            }
+        });
+
+        // Xử lý áp dụng mã giảm giá
         document.querySelector('.btn-apply-discount').addEventListener('click', function() {
             let discountCode = document.querySelector('input[name="discount_code"]').value;
 
@@ -296,8 +397,7 @@ if (isset($_GET['profile_updated'])) {
                     const discountMessage = document.querySelector('.discount-message');
                     const discountedTotal = document.getElementById('discounted-total');
                     const totalAfterDiscount = document.getElementById('total_after_discount');
-                    const totalPriceCouponInput = document.getElementById(
-                        'total_price_coupon'); // Input ẩn
+                    const totalPriceCouponInput = document.getElementById('total_price_coupon');
 
                     if (response.success) {
                         // Hiển thị thông báo thành công
